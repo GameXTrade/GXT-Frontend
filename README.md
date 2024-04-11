@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Installation
 
 ## 1. Installiere Nodejs & Git
@@ -21,3 +22,7 @@ Um das Projekt im Termial pausieren/ schließen
 
 Windows:
 > `STRG + C`
+=======
+# GXT-Project
+This project is about a website to offer assets to specific games
+>>>>>>> 7be115ce5951897a7877762a076affd750b7df4a
