@@ -3,6 +3,8 @@ This project is about a website to offer assets to specific games
 
 ## Installation
 
+Clone Repo to a folder then ...
+
 ### 1. Installiere Nodejs & Git
    
 > NodeJs: v20.12.2 (LTS) Link: https://nodejs.org/en/download
