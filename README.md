@@ -3,7 +3,7 @@ This project is about a website to offer assets to specific games
 
 ## Installation
 
-Clone Repo to a folder then ...
+Clone das Repo in einen Ordner (bei mir ist es in D:/Webproj/gtx) ...
 
 ### 1. Installiere Nodejs & Git
    

@@ -21,7 +21,7 @@ function SignInFormular() {
     e.preventDefault();
     console.log('Eingereicht: ', { name, email, imageLink });
     const userData = {
-      name, email, Image: imageLink
+      username: name, email, image: imageLink
     }
 
     try{
