@@ -10,27 +10,49 @@ function VerifyUser() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const verifyUser = async () => {
+        const loginOrVerifyUser = async () => {
             try {
-                // Senden Sie eine Anfrage an den Server, ohne das JWT explizit anzufügen
-                const response = await axios.get('/user/verify-user');
-                console.log('Verification response:', response.data);
-                if (response.data.code === "OK"){
-                    localStorage.setItem('user', JSON.stringify(response.data.token))
-                    setUser(response.data.token)
-                    navigate("/status", {state: {message: response.data.code}})
-                }else if(response.data.code === "NOT OK"){
-                    navigate("/status", {state: {message: response.data.code}})
-                }else {
-                    navigate("/status", {state: {message: response.data.code}})
+                const token = new URLSearchParams(location.search).get('token');
+                if (token) {
+                    // JWT-Token in der URL-Query vorhanden, führe loginWithToken aus
+                    await loginWithToken(token);
+                } else {
+                    // Kein JWT-Token in der URL-Query vorhanden, führe verifyUser aus
+                    await verifyUser();
                 }
             } catch (error) {
-                console.error('Error verifying user:', error);
+                console.error('Error logging in or verifying user:', error);
             }
         };
+    
+        loginOrVerifyUser();
+    }, [location.search, navigate, setUser]);
 
-        verifyUser();
-    }, []);
+    async function loginWithToken(token) {
+        try{
+            const response = await axios.post('/user/login-user', { token });
+            localStorage.setItem('user', JSON.stringify(response.data.token))
+            setUser(response.data.token)
+            navigate("/status", {state: {message: response.data.code}})
+            console.log(response.data)
+        }catch(error){
+            console.error('Error logging in with token:', error);
+        }
+    }
+    
+    async function verifyUser() {
+        const response = await axios.get('/user/verify-user');
+        console.log('Verification response:', response.data);
+        if (response.data.code === "OK"){
+            localStorage.setItem('user', JSON.stringify(response.data.token))
+            setUser(response.data.token)
+            navigate("/status", {state: {message: response.data.code}})
+        } else if(response.data.code === "NOT OK"){
+            navigate("/status", {state: {message: response.data.code}})
+        } else {
+            navigate("/status", {state: {message: response.data.code}})
+        }
+    }
 
     return (
         <div>

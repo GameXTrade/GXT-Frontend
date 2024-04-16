@@ -6,6 +6,7 @@ import { createBrowserRouter, createRoutesFromElements ,RouterProvider, Route } 
 
 //pages
 import Home from './pages/Home';
+import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import VerifyToken from './pages/VerifyToken';
 import RootLayout from './components/RootLayout';
@@ -15,14 +16,18 @@ import RootLayout from './components/RootLayout';
 import UserContextProvider from './context/UserContextProvider';
 import Status from './pages/Status';
 
+import ChatBubbleWindow from './components/ChatBubbleWindow';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     // Route/RootLayout work like a wrapper
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Home/>}/> 
-      <Route path='sign-in'element={<SignIn/>}/> 
       <Route path='verify'element={<VerifyToken />}/> 
       <Route path='status'element={<Status />}/> 
+      <Route path='sign-up'element={<SignUp/>}/> 
+      <Route path='sign-in'element={<SignIn/>}/> 
+      <Route path='chat'element={<ChatBubbleWindow/>}/> 
     </Route>
 
   )
