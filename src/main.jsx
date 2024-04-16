@@ -10,6 +10,10 @@ import SignIn from './pages/SignIn';
 import VerifyToken from './pages/VerifyToken';
 import RootLayout from './components/RootLayout';
 
+
+// Contextprovider
+import UserContextProvider from './context/UserContextProvider';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     // Route/RootLayout work like a wrapper
@@ -17,7 +21,6 @@ const router = createBrowserRouter(
       <Route index element={<Home/>}/> 
       <Route path='sign-in'element={<SignIn/>}/> 
       <Route path='verify'element={<VerifyToken />}/> 
-
     </Route>
 
   )
@@ -25,6 +28,9 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserContextProvider>
+
+      <RouterProvider router={router} />
+    </UserContextProvider>
   </React.StrictMode>,
 )

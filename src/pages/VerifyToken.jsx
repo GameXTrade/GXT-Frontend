@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from '../api/axios';
+import UserContext from '../context/UserContext';
 
 function VerifyUser() {
+
+    const {setUser} = useContext(UserContext)
+
     useEffect(() => {
         const verifyUser = async () => {
             try {
@@ -11,7 +15,9 @@ function VerifyUser() {
                 if (response.data.code === "OK"){
                     console.log("Alles okay")
                 }else if(response.data.code === "NOT OK"){
-                    console.log("already verified > redirect to home")
+                    console.log("already verified > redirect to home",response.data.token)
+                    setUser(response.data.token)
+                    localStorage.setItem('user', JSON.stringify(response.data.token))
                 }else {
                     console.log(response.data.code)
                 }
