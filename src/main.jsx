@@ -13,6 +13,7 @@ import RootLayout from './components/RootLayout';
 
 // Contextprovider
 import UserContextProvider from './context/UserContextProvider';
+import Status from './pages/Status';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route index element={<Home/>}/> 
       <Route path='sign-in'element={<SignIn/>}/> 
       <Route path='verify'element={<VerifyToken />}/> 
+      <Route path='status'element={<Status />}/> 
     </Route>
 
   )

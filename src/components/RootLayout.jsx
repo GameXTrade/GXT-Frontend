@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { NavLink,Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import UserContext from '../context/UserContext';
 
