@@ -33,7 +33,7 @@ function VerifyUser() {
             const response = await axios.post('/user/login-user', { token });
             localStorage.setItem('user', JSON.stringify(response.data.token))
             setUser(response.data.token)
-            navigate("/status", {state: {message: response.data.code}})
+            navigate("/")
             console.log(response.data)
         }catch(error){
             console.error('Error logging in with token:', error);

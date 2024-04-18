@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from "../api/axios";
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SignInFormular() {
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ function SignInFormular() {
     try {
       const userData = { email };
       const response = await axios.post("/user/login", userData);
-      navigate("/status", { state: { message: response.data } });
+      navigate("/status", { state: { message: response.data.code } });
     } catch (err) {
       console.error('Fehler beim Senden der Daten:', err.response.data.detail);
       setEmailError(err.response.data.detail);
