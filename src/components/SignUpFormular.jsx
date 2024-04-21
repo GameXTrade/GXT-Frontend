@@ -33,7 +33,7 @@ function SignUpFormular() {
 
     try{
       const response = await axios.post("/user", userData)
-      navigate("/status", {state: {message: response.data}})
+      navigate("/status", {state: {message: response.data.code}})
     } catch (err){
       console.error('Fehler beim Senden der Daten:', err.response.data.detail);
       setEmailerror(err.response.data.detail)

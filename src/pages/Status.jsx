@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { useLocation } from 'react-router-dom';
+
 export default function Status() {
     const location = useLocation();
     const message = location.state ? location.state.message : "Keine Nachricht vorhanden";

@@ -11,6 +11,7 @@ import SignIn from './pages/SignIn';
 import VerifyToken from './pages/VerifyToken';
 import RootLayout from './components/RootLayout';
 
+import ProtectedRoutes from './utils/ProtectedRoutes';
 
 // Contextprovider
 import UserContextProvider from './context/UserContextProvider';
@@ -24,10 +25,14 @@ const router = createBrowserRouter(
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Home/>}/> 
       <Route path='verify'element={<VerifyToken />}/> 
-      <Route path='status'element={<Status />}/> 
       <Route path='sign-up'element={<SignUp/>}/> 
       <Route path='sign-in'element={<SignIn/>}/> 
-      <Route path='chat'element={<ChatBubbleWindow/>}/> 
+
+      <Route element={<ProtectedRoutes/>}>
+        <Route path='chat'element={<ChatBubbleWindow/>}/> 
+        <Route path='status'element={<Status />}/> 
+
+      </Route>
     </Route>
 
   )
