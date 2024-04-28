@@ -19,6 +19,7 @@ function SignInFormular() {
     try {
       const userData = { email };
       const response = await axios.post("/user/login", userData);
+      console.log(response)
       navigate("/status", { state: { message: response.data.code } });
     } catch (err) {
       console.error('Fehler beim Senden der Daten:', err.response.data.detail);

@@ -4,6 +4,10 @@ import UserContext from '../context/UserContext';
 
 function ProtectedRoutes() {
     const { user } = useContext(UserContext);
+    if (user){
+        localStorage.setItem('user', user)
+        
+    }
     console.log(user)
     // const user = null
     return user ? <Outlet/>:<Navigate to="sign-in"/>

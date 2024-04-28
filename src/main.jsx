@@ -18,6 +18,7 @@ import UserContextProvider from './context/UserContextProvider';
 import Status from './pages/Status';
 
 import ChatBubbleWindow from './components/ChatBubbleWindow';
+import Me from './pages/Me';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,21 +29,21 @@ const router = createBrowserRouter(
       <Route path='sign-up'element={<SignUp/>}/> 
       <Route path='sign-in'element={<SignIn/>}/> 
 
-      <Route element={<ProtectedRoutes/>}>
+      {/* <Route element={<ProtectedRoutes/>}> */}
         <Route path='chat'element={<ChatBubbleWindow/>}/> 
         <Route path='status'element={<Status />}/> 
-
-      </Route>
+        <Route path='me' element={<Me />}/>
+      {/* </Route> */}
     </Route>
 
   )
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <UserContextProvider>
 
       <RouterProvider router={router} />
     </UserContextProvider>
-  // </React.StrictMode>,
+  </React.StrictMode>
 )

@@ -14,14 +14,21 @@ export default function Status() {
         content = <h1 className='flex flex-col items-center'>
                     <div>Erfolgreich verifiziert.</div>
                 </h1>
-    }else{
+    } 
+    else if (message==="REFRESH"){
+        localStorage.removeItem('user');
+        content = <h1 className='flex flex-col items-center'>
+                    <div>Dein Token ist abgelaufen, logge dich neu ein.</div>
+                </h1>
+    }
+
+    else{
         content = <h1 className='flex flex-col items-center'>
                     {message}
                 </h1>
     }
     return (
         <div className='flex justify-center items-center text-xl' style={{ height: "calc(100dvh - 64px)" }}>
-            
             {content}
         </div>
 
