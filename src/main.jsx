@@ -29,11 +29,11 @@ const router = createBrowserRouter(
       <Route path='sign-up'element={<SignUp/>}/> 
       <Route path='sign-in'element={<SignIn/>}/> 
 
-      {/* <Route element={<ProtectedRoutes/>}> */}
+      <Route element={<ProtectedRoutes/>}>
         <Route path='chat'element={<ChatBubbleWindow/>}/> 
-        <Route path='status'element={<Status />}/> 
+        {/* <Route path='status'element={<Status />}/>  */}
         <Route path='me' element={<Me />}/>
-      {/* </Route> */}
+      </Route>
     </Route>
 
   )
