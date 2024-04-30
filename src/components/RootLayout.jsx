@@ -27,7 +27,7 @@ function RootLayout() {
 
                     <img
                       className="w-9 h-9 rounded-full"
-                      src={user?.image || defaultImage}
+                      src={user?.image || "https://i0.wp.com/dashboard.render.com/default_gravatar.png?ssl=1"}
 
                       alt=""
                     />
