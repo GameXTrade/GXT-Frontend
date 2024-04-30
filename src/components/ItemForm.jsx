@@ -70,7 +70,7 @@ const ItemForm = () => {
             // navigate("/status", {state: {message: response.data.code}})
         } catch (err){
             console.error('Fehler beim Senden der Daten:', err.response.data.detail);
-            navigate("/status", {state: {message: "REFRESH"}})
+            // navigate("/status", {state: {message: "REFRESH"}})
         }
     };
 

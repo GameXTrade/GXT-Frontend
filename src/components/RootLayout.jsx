@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import UserContext from '../context/UserContext';
+import defaultImage from '../assets/default.png';
 
 function RootLayout() {
   const { user } = useContext(UserContext);
@@ -26,7 +27,8 @@ function RootLayout() {
 
                     <img
                       className="w-9 h-9 rounded-full"
-                      src={user?.image}
+                      src={user?.image || defaultImage}
+
                       alt=""
                     />
                     <span className="top-0 left-7 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
