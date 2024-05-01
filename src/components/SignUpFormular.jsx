@@ -51,9 +51,6 @@ function SignUpFormular() {
   return (
     <div className='flex flex-col items-center '>
       <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mt-10 shadow-xl p-11 rounded-lg">
-        <NavLink to={`/sign-in`} className="font-medium text-gray-800 hover:text-gray-300">
-          Sign In&nbsp;<span aria-hidden="true">&rarr;</span>
-        </NavLink>
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name:</label>
           <input

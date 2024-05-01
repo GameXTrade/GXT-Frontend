@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
+import UserContext from '../context/UserContext';
 import axios from "../api/axios";
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../context/UserContext';
 
 function SignInFormular() {
   const [email, setEmail] = useState('');
@@ -30,11 +30,10 @@ function SignInFormular() {
         localStorage.setItem('user', JSON.stringify(response.data.token));
         setUser(response.data.token);
       }
-      console.log(response.data)
-      navigate("/");
+      navigate("/")
     } catch (err) {
-      console.error('Fehler beim Senden der Daten:', err.response.data.detail);
-      setEmailError(err.response.data.detail);
+      console.error('Fehler beim Senden der Daten:', err.response);
+      setEmailError(err.response);
     }
   };
 

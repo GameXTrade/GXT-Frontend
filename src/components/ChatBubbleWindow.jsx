@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 function ChatBubbleWindow() {
     return (
         <div className='flex w-full bg-gray-100 justify-center' style={{ height: "calc(100dvh - 64px)" }}>
+            <title>GameXTrade | Chat</title>
             <div className='flex bg-slate-300 w-full h-full'>
                 <div className={`bg-green-50 w-[25%]`}>
                     Sidebar

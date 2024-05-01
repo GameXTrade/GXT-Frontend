@@ -3,13 +3,10 @@ import { useContext } from 'react'
 import UserContext from '../context/UserContext';
 
 function ProtectedRoutes() {
-    const { user } = useContext(UserContext);
-    if (user){
-        localStorage.setItem('user', user)
-        
+    const { user, isLoading  } = useContext(UserContext);
+    if (isLoading){
+        return <div>Lädt...</div>
     }
-    console.log(user)
-    // const user = null
     return user ? <Outlet/>:<Navigate to="sign-in"/>
 }
 
