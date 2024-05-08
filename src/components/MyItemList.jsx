@@ -7,7 +7,7 @@ function MyItemList() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('/item');
+        const response = await axios.get('/item/all');
         console.log(response.data)
         setItems(response.data);
       } catch (error) {

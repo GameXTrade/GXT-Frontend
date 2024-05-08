@@ -11,44 +11,7 @@ function RootLayout() {
   return (
     <div className="root-layout">
       <ComplexNavbar/>
-      {/* <header>
-        <nav>
-          <div className="flex w-full h-full justify-between items-center p-3 bg-slate-50 drop-shadow-sm">
-            <div className="text-4xl text-indigo-900 font-bold">
-              <NavLink to={`/`}>GXTrade</NavLink>
-            </div>
-            {user ? <div className="flex items-center">
-              <div className="mx-2 p-1 bg-slate-50 hover:drop-shadow-md rounded-full drop-shadow-none">
-                <NavLink to={`/chat`}>
-                  <ChatBubbleIcon sx={{ color: '#DFDFDF', '&:hover': { color: '#EDEDED' } }} />
-                </NavLink>
-              </div>
-              <div className="relative">
-                <NavLink to={`/me`}>
-                  <img
-                    className="w-9 h-9 rounded-full"
-                    src={user?.image || "https://i0.wp.com/dashboard.render.com/default_gravatar.png?ssl=1"}
-                    alt=""
-                  />
-                  <span className="top-0 left-7 absolute w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                </NavLink>
-              </div>
-            </div> 
-            :
-            <div>
-              <NavLink to={`/sign-in`} className="font-medium text-gray-800 hover:text-gray-300 p-1 mr-2">
-                Sign In
-              </NavLink>
-              <NavLink to={`/sign-up`} className="font-medium text-gray-800 hover:text-gray-300 border p-1 rounded-lg">
-                Sign Up
-              </NavLink>
-            </div>
-            }
-            
-          </div>
-        </nav>
-      </header> */}
-
+  
       <main>
         <Outlet />
       </main>

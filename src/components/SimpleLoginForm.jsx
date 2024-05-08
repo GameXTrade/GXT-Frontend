@@ -29,7 +29,7 @@ export function SimpleLoginForm() {
     try {
             // Sende Benutzerdaten an das Backend
             const response = await axios.post("/user/login", userData);
-            console.log(response)
+            // console.log(response)
             if (response.data.token){
                 localStorage.setItem('user', JSON.stringify(response.data.token));
                 setUser(response.data.token);
