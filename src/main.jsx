@@ -20,6 +20,8 @@ import Status from './pages/Status';
 import ChatBubbleWindow from './components/ChatBubbleWindow';
 import Me from './pages/Me';
 
+import ProductPage from './pages/ProductPage';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     // Route/RootLayout work like a wrapper
@@ -29,6 +31,8 @@ const router = createBrowserRouter(
       <Route path='sign-up'element={<SignUp/>}/> 
       <Route path='sign-in'element={<SignIn/>}/> 
 
+      <Route path='products/:productId' element={<ProductPage/>}/>
+      
       <Route element={<ProtectedRoutes/>}>
         <Route path='chat'element={<ChatBubbleWindow/>}/> 
         {/* <Route path='status'element={<Status />}/>  */}

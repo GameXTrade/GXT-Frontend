@@ -1,5 +1,4 @@
 import React from 'react'
-import SignInFormular from '../components/SignInFormular'
 import { SimpleLoginForm } from '../components/SimpleLoginForm'
 
 function SignIn() {

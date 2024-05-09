@@ -1,4 +1,3 @@
-import SignUpFormular from "../components/SignUpFormular"
 import { SimpleRegistrationForm } from '../components/SimpleRegistrationForm'
 function SignUp() {
 
