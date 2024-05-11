@@ -1,34 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
-
+import { Input, Button } from "@material-tailwind/react";
 
 function ChatBubbleWindow() {
+
+    const [email, setEmail] = React.useState("");
+    const onChange = ({ target }) => setEmail(target.value);
+
+
+    const {data: items, isLoading, error} = useQuery({
+        queryKey: ['items'], 
+        queryFn:  () => 
+            fetch('http://localhost:8000/item/all').then((res)=> res.json())
+    });
+    if (error) return <div>ERROR</div>;
+
+    if (isLoading) return <div>Loading ...</div>;
     return (
-        <div className='flex w-full bg-gray-100 justify-center' style={{ height: "calc(100dvh - 64px)" }}>
+        <div className='flex w-full h-full p-5 justify-center '>
+            
             <title>GameXTrade | Chat</title>
-            <div className='flex bg-slate-300 w-full h-full'>
-                <div className={`bg-green-50 w-[25%]`}>
+            <div className='flex w-full h-full rounded-xl shadow-xl border'>
+                <div className="w-[25%] p-5 rounded-tl-xl rounded-bl-xl bg-red-50 border-r-2">
                     Sidebar
                 </div>
                 
-                <div className={`chat w-[75%]`}>
-                    <div className="bg-white h-[90%]">
-                        Display
+                <div className="chat w-[75%]">
+                    <div className="bg-white h-[90%] rounded-tr-xl">
+                        <ul>
+                            {items.map((item, index) => (
+                                <li key={index}>{item.name}</li>
+                            ))}
+                        </ul>
 
-                        
+                  
                     </div>
-                    <div className="flex bg-blue-50 h-[10%] items-center justify-center border-x">
-                        
-                        <input type="text" className='h-10 rounded-md w-[80%] pl-[20px]' placeholder='Gib deine Nachricht ein'/>
+                    <div className=" flex bg-blue-50 h-[10%] items-center justify-center rounded-br-xl border-t-2">
+                        <div className="relative flex w-full mx-10">
+                            <Input
+                                type="text"
+                                label="Chat"
+                                value={email}
+                                onChange={onChange}
+                                className="pr-20"
+                                containerProps={{
+                                className: "min-w-0",
+                                }}
+                            />
+                            <Button
+                                size="sm"
+                                color={email ? "gray" : "blue-gray"}
+                                disabled={!email}
+                                className="!absolute right-1 top-1 rounded"
+                            >
+                                SEND
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-      );
+    );
 }
-<div class="flex bg-slate-300 w-full h-full">flex
-    <div class="bg-green-50 w-[25%]">Sidebar</div>
-    <div class="chat w-[75%]">…</div>
-</div>
-export default ChatBubbleWindow
+
+export default ChatBubbleWindow;

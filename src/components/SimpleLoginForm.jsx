@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
-import axios from "../api/axios";
+// import axios from "../api/axios";
+import axios from 'axios';
+
 import { useNavigate, NavLink } from 'react-router-dom';
 
 import UserContext from '../context/UserContext';
@@ -27,7 +29,6 @@ export function SimpleLoginForm() {
     };
 
     try {
-            // Sende Benutzerdaten an das Backend
             const response = await axios.post("/user/login", userData);
             // console.log(response)
             if (response.data.token){

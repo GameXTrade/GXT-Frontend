@@ -1,17 +1,20 @@
 import React, { useState, useEffect  } from 'react';
 import axios from "../api/axios";
-import { useNavigate } from 'react-router-dom';
+
+import { Input } from "@material-tailwind/react";
+import { Select, Option } from "@material-tailwind/react";
 
 const ItemForm = () => {
     const [selectedAntiflags, setSelectedAntiflags] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         name: '',
         antiflag: '',
         link: '',
         type: '',
-        imagelink: ''
+        imagelink: '',
+        price: ''
     });
     const antiflags = [
         "Frau", "Mann", "Krieger", "Ninja", "Sura", "Schamane",
@@ -32,18 +35,19 @@ const ItemForm = () => {
     const visibleIndices = [0, 1, 2, 3, 4, 5, 18];
     const visibleItemtypeIndices = [ 1, 2, 3 ];
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChange = (name, value) => {
         setFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
+        console.log(name, value)
     };
+    
 
     const handleCheckboxChange = (index) => {
         setSelectedAntiflags(prev => {
             const newSelected = prev.includes(index) ? prev.filter(item => item !== index) : [...prev, index];
-            updateAntiflagInFormData(newSelected); // Update formData here
+            updateAntiflagInFormData(newSelected);
             return newSelected;
         });
     };
@@ -62,7 +66,7 @@ const ItemForm = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log('Form data submitted:', formData);
+        // console.log('Form data submitted:', formData);
       
         try{
             const response = await axios.post("/item/create", formData)
@@ -76,20 +80,19 @@ const ItemForm = () => {
 
 
     return (
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex flex-col justify-center items-center bg-white w-full h-full'>
 
-            <form onSubmit={handleSubmit} className='bg-indigo-50 flex flex-col rounded-lg p-8 shadow-lg'>
-                <div className='pb-2'>
-                    <label className='pr-2'>Item Name:</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+            <form onSubmit={handleSubmit} className='flex flex-col rounded-lg p-8 shadow-xl'>
+                    
+                <div className="w-72 pb-2">
+                    <Input label="Item Name" name="name" value={formData.name} onChange={(e) => handleChange(e.target.name, e.target.value)} required/>
                 </div>
-                <div className='pb-2'>
-                    <label className='pr-2'>Link:</label>
-                    <input type="text" name="link" value={formData.link} onChange={handleChange} required />
+                <div className="w-72 pb-2">
+                    <Input label="Downloadlink" name="link" value={formData.link} onChange={(e) => handleChange(e.target.name, e.target.value)}/>
                 </div>
-                <div className='pb-2'>
-                    <label className='pr-2'>Image (optional):</label>
-                    <input type="text" name="imagelink" value={formData.imagelink} onChange={handleChange} />
+
+                <div className='w-72 pb-2'>
+                    <Input label="Imagelink" name="imagelink" value={formData.imagelink} onChange={(e) => handleChange(e.target.name, e.target.value)}/>
                 </div>
                 <div className='pb-2'>
                     <button className='w-full bg-indigo-200 rounded-md shadow-md hover:bg-indigo-50' type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
@@ -97,7 +100,8 @@ const ItemForm = () => {
                     </button>
                     {isDropdownOpen && (
                         <ul style={{ listStyle: 'none', padding: 0 }} className='m-4'>
-                            {antiflags.map((antiflag, index) => visibleIndices.includes(index) && (
+                            
+                            {visibleIndices.map((index) => (
                                 <li key={index}>
                                     <input className='m-1'
                                         type="checkbox"
@@ -105,32 +109,30 @@ const ItemForm = () => {
                                         checked={selectedAntiflags.includes(index)}
                                         onChange={() => handleCheckboxChange(index)}
                                     />
-                                    <label htmlFor={`checkbox-${index}`}>{antiflag}</label>
+                                    <label htmlFor={`checkbox-${index}`}>{antiflags[index]}</label>
                                 </li>
                             ))}
                         </ul>
                     )}
                 </div>
-                <div className='pb-2'>
-                    <label>ItemTyp:</label>
-                    <ul className='ml-4'>
-                        {itemType.map((item, index) => visibleItemtypeIndices.includes(index) && (
-                            <li key={index}>
-                                <input className='m-1'
-                                    type="radio" // Ändern von Checkbox zu Radio
-                                    name="type" // Alle Radiobuttons teilen denselben Namen, um Gruppenverhalten zu ermöglichen
-                                    id={`radio-${index}`}
-                                    value={index} // Wert entspricht dem Itemtyp
-                                    checked={formData.type === index.toString()} // Überprüfen, ob dieser Radiobutton aktuell ausgewählt ist
-                                    onChange={handleChange} // Update des Formularzustands bei Änderung
-                                />
-                                <label htmlFor={`radio-${index}`}>{item}</label>
-                            </li>
+                <div className='w-72 pb-2'>
+                    <Select
+                        label="ItemTyp"
+                        name='type'
+                        value={formData.type}
+                        onChange={(val) => handleChange('type', val)}
+                        >
+                        {visibleItemtypeIndices.map(index => (
+                            <Option key={index} value={(index).toString()}>
+                                {itemType[index]}
+                            </Option>
                         ))}
-                    </ul>
+                    </Select>
                 </div>
-
-                <button type="submit" className='bg-blue-100 px-8 py-1 rounded-md'>Submit</button>
+                <div className='w-72 pb-2'>
+                    <Input label="Preis" name="price" value={formData.price} onChange={(e) => handleChange(e.target.name, e.target.value)} required/>
+                </div>
+                <button type="submit" className='bg-blue-100 px-8 py-1 rounded-md hover:bg-blue-gray-50'>Submit</button>
             </form>
         </div>
     );

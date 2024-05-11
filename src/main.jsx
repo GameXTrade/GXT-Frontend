@@ -22,6 +22,19 @@ import Me from './pages/Me';
 
 import ProductPage from './pages/ProductPage';
 
+// react - query: https://tanstack.com/query/v5/docs/framework/react/quick-start
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+// Create a client
+const queryClient = new QueryClient({})
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     // Route/RootLayout work like a wrapper
@@ -34,7 +47,7 @@ const router = createBrowserRouter(
       <Route path='products/:productId' element={<ProductPage/>}/>
       
       <Route element={<ProtectedRoutes/>}>
-        <Route path='chat'element={<ChatBubbleWindow/>}/> 
+        {/* <Route path='chat'element={<ChatBubbleWindow/>}/>  */}
         {/* <Route path='status'element={<Status />}/>  */}
         <Route path='me' element={<Me />}/>
       </Route>
@@ -45,9 +58,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserContextProvider>
-
-      <RouterProvider router={router} />
-    </UserContextProvider>
+      <UserContextProvider>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+        </QueryClientProvider>
+      </UserContextProvider>
   </React.StrictMode>
 )

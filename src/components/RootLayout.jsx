@@ -4,17 +4,24 @@ import { NavLink, Outlet } from 'react-router-dom';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 // import defaultImage from '../assets/default.png';
 import { ComplexNavbar } from './ComplexNavbar';
+import { FooterWithLogo } from './FooterWithLogo';
 
 
 function RootLayout() {
   const { user } = useContext(UserContext);
   return (
     <div className="root-layout">
-      <ComplexNavbar/>
+      <header>
+        <ComplexNavbar/>
+      </header>
   
       <main>
         <Outlet />
       </main>
+
+      <footer>
+        <FooterWithLogo />
+      </footer>
     </div>
   );
 }
