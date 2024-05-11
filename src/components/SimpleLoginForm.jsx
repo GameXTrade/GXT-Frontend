@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-// import axios from "../api/axios";
-import axios from 'axios';
+import axios from "../api/axios";
+// import axios from 'axios';
 
 import { useNavigate, NavLink } from 'react-router-dom';
 

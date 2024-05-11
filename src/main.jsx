@@ -9,15 +9,13 @@ import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import VerifyToken from './pages/VerifyToken';
-import RootLayout from './components/RootLayout';
+import RootLayout from './components/Root/RootLayout';
 
 import ProtectedRoutes from './utils/ProtectedRoutes';
 
 // Contextprovider
 import UserContextProvider from './context/UserContextProvider';
-import Status from './pages/Status';
 
-import ChatBubbleWindow from './components/ChatBubbleWindow';
 import Me from './pages/Me';
 
 import ProductPage from './pages/ProductPage';

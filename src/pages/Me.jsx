@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import SidebarWithLogo from '../components/SidebarWithLogo';
-import ItemForm from '../components/ItemForm';
 import NoContent from '../components/NoContent';
-import ChatBubbleWindow from '../components/ChatBubbleWindow';
+import ChatBubbleWindow from '../components/SideBar/ChatBubbleWindow';
+
+import ItemForm from '../components/SideBar/AssetManagement/ItemForm';
+import { ActiveTableWithStripedRows } from '../components/SideBar/AssetManagement/ActiveTableWithStripedRows';
+
 
 function Me() {
     const [openComponent, setOpenComponent] = useState(null);
@@ -20,7 +23,7 @@ function Me() {
             case 'UploadAsset':
                 return <ItemForm />;
             case 'EditAssets':
-                return <NoContent />;
+                return <ActiveTableWithStripedRows/>;
             case 'Inbox':
                 return <ChatBubbleWindow />;
             case 'Settings':
@@ -33,7 +36,7 @@ function Me() {
         <div className="flex">
             <title>GameXTrade | Me</title>
             <SidebarWithLogo openComponent={handleOpenComponent} />
-            <div className='w-full'>
+            <div className='w-full p-3'>
                 {/* Hier wird die aktuell geöffnete Komponente gerendert */}
                 {getComponent(openComponent)}
             </div>

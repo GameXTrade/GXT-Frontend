@@ -1,5 +1,4 @@
 import React, { useState, useEffect  } from 'react';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
 import { Input, Button } from "@material-tailwind/react";
@@ -15,6 +14,7 @@ function ChatBubbleWindow() {
         queryFn:  () => 
             fetch('http://localhost:8000/item/all').then((res)=> res.json())
     });
+    // console.log(items)
     if (error) return <div>ERROR</div>;
 
     if (isLoading) return <div>Loading ...</div>;
