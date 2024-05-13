@@ -93,6 +93,8 @@ export default function RecentlyAddedCarousel() {
         <Carousel responsive={responsive}
             removeArrowOnDeviceType={["tablet", "mobile"]}
             containerClass="pl-6"
+            partialVisible={true}
+        
         >
         {items && items.length > 0 ? 
             items.map(item => (

@@ -1,19 +1,25 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState  } from 'react';
 import axios from "../../../api/axios";
 
 import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 
-const ItemForm = () => {
+
+
+const ItemForm = ({ updateUploadStatus }) => {
     const [selectedAntiflags, setSelectedAntiflags] = useState([]);
+    const [selectedWearables, setSelectedWearables] = useState([]);
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isDropdownOpenWearable, setIsDropdownOpenWearable] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
-        antiflag: '',
+        antiflag: 0,
         link: '',
         type: '',
         imagelink: '',
+        wearable: 0,
         price: ''
     });
     const antiflags = [
@@ -32,8 +38,14 @@ const ItemForm = () => {
         "Mineral", "Spezialitem", "Tool", "Lottery", "Geld/Yang", "Geiststein","Beutel",
         "Fisch", "Angel", "Resourcen", "Lagerfeuer",
     ];
+    const wearables = [
+        "Armor", "Helm", "Shoes", "Bracelet", "Weapon",
+        "Necklace", "Earrings", "UNIQUE", "Shield", "Arrow",
+        "Hair", "Ability", "Talisman", "Glove"
+    ]
     const visibleIndices = [0, 1, 2, 3, 4, 5, 18];
     const visibleItemtypeIndices = [ 1, 2, 3 ];
+    const visibleWearables = [0, 4, 10]
 
     const handleChange = (name, value) => {
         setFormData(prevState => ({
@@ -45,9 +57,21 @@ const ItemForm = () => {
     
 
     const handleCheckboxChange = (index) => {
-        setSelectedAntiflags(prev => {
-            const newSelected = prev.includes(index) ? prev.filter(item => item !== index) : [...prev, index];
+        setSelectedAntiflags((prev) => {
+            const newSelected = prev.includes(index)
+                ? prev.filter((item) => item !== index)
+                : [...prev, index];
             updateAntiflagInFormData(newSelected);
+            return newSelected;
+        });
+    };
+
+    const handleCheckboxChangeWearables = (index) => {
+        setSelectedWearables((prev) => {
+            const newSelected = prev.includes(index)
+                ? prev.filter((item) => item !== index)
+                : [...prev, index];
+            updateWearableInFormData(newSelected);
             return newSelected;
         });
     };
@@ -56,13 +80,16 @@ const ItemForm = () => {
         const antiflagSum = newSelected.reduce((sum, index) => sum + Math.pow(2, index), 0);
         setFormData(prevState => ({
             ...prevState,
-            antiflag: antiflagSum.toString()
+            antiflag: antiflagSum
         }));
     };
-
-    useEffect(() => {
-        updateAntiflagInFormData(selectedAntiflags);
-    }, [selectedAntiflags]);
+    const updateWearableInFormData = (newSelected) => {
+        const wearableSum = newSelected.reduce((sum, index) => sum + Math.pow(2, index), 0);
+        setFormData(prevState => ({
+            ...prevState,
+            wearable: wearableSum
+        }));
+    };
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -70,7 +97,8 @@ const ItemForm = () => {
       
         try{
             const response = await axios.post("/item/create", formData)
-            console.log(response)
+            updateUploadStatus(response.statusText)
+            console.log(response.statusText)
             // navigate("/status", {state: {message: response.data.code}})
         } catch (err){
             console.error('Fehler beim Senden der Daten:', err.response.data.detail);
@@ -128,6 +156,27 @@ const ItemForm = () => {
                             </Option>
                         ))}
                     </Select>
+                </div>
+                <div className='pb-2'>
+                    <button className='w-full bg-indigo-200 rounded-md shadow-md hover:bg-indigo-50' type="button" onClick={() => setIsDropdownOpenWearable(!isDropdownOpenWearable)}>
+                        Was ist das für ein Item?: {formData.wearable}
+                    </button>
+                    {isDropdownOpenWearable && (
+                        <ul style={{ listStyle: 'none', padding: 0 }} className='m-4'>
+                            
+                            {visibleWearables.map((index) => (
+                                <li key={index}>
+                                    <input className='m-1'
+                                        type="checkbox"
+                                        id={`checkbox2-${index}`}
+                                        checked={selectedWearables.includes(index)}
+                                        onChange={() => handleCheckboxChangeWearables(index)}
+                                    />
+                                    <label htmlFor={`checkbox2-${index}`}>{wearables[index]}</label>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
                 <div className='w-72 pb-2'>
                     <Input label="Preis" name="price" value={formData.price} onChange={(e) => handleChange(e.target.name, e.target.value)} required/>

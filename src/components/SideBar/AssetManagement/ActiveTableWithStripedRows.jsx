@@ -50,18 +50,17 @@ export function ActiveTableWithStripedRows() {
               </td>
               <td className="p-4">
                 <div className="w-max">
-                    <Chip
-                      size="sm"
-                      variant="ghost"
-                      value={activated ? "active" : "inactive"}
-                      color={
-                        activated === "active"
-                          ? "green"
-                          : activated === "inactive"
-                          ? "amber"
-                          : "red"
-                      }
-                    />
+                  <Chip
+                    size="sm"
+                    variant="ghost"
+                    value={activated ? "active" : "inactive"}
+                    color={
+                      activated
+                        ? "green"
+                        : "red"
+                    }
+                  />
+
                 </div>
               </td>
               <td className="p-4">
