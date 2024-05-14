@@ -1,6 +1,8 @@
 import { Card, Typography,Tooltip,IconButton,Chip } from "@material-tailwind/react";
 import { PencilIcon } from "@heroicons/react/24/solid";
 
+import axios from "../../../api/axios"
+
 import { useQuery } from '@tanstack/react-query';
 
 import { Spinner } from "@material-tailwind/react";
@@ -10,16 +12,29 @@ const TABLE_HEAD = ["Name", "Status", "Date", "Price" ,""];
  
 export function ActiveTableWithStripedRows() {
 
-  const {data: TABLE_ROWS, isLoading, error} = useQuery({
+  const { data: TABLE_ROWS, isLoading, error, isError } = useQuery({
     queryKey: ['items'], 
-    queryFn:  () => 
-        fetch('http://localhost:8000/item', {credentials: 'include'}).then((res)=> res.json())
+    queryFn:  async() => {
+      const response = await fetch('http://localhost:8000/item', {credentials: 'include'})
+      return response.json()
+    },
+    throwOnError: true
   });
 
-  if (error) return <div>{error}</div>;
-    if (isLoading) return <div className="flex w-full h-full justify-center items-center"><Spinner className="h-12 w-12" /></div>;
+  // console.log(TABLE_ROWS)
+  if (isLoading) return <div className="flex w-full h-full justify-center items-center"><Spinner className="h-12 w-12" /></div>;
+  if (TABLE_ROWS && TABLE_ROWS.detail) {
+    const errorMessage = TABLE_ROWS.detail;
+    let response = ""
+    if (errorMessage==="Invalid token type"){
+      response = "Token existiert nicht: logge dich neu ein."
+    }else if(errorMessage==="Not Found"){
+      response = "Fehler beim laden der API URL"
+    }
+    return <div className="flex justify-center items-center text-4xl w-full h-full">{response}</div>;
+  }
 
-  if (!Array.isArray(TABLE_ROWS) || TABLE_ROWS.length === 0) {
+  if (!TABLE_ROWS || TABLE_ROWS.length === 0) {
     return <div className="flex justify-center items-center text-4xl w-full h-full">No data available</div>;
   }
   return (
@@ -41,7 +56,7 @@ export function ActiveTableWithStripedRows() {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, activated, created_at, price }, index) => (
+          {!isError && TABLE_ROWS.map(({ name, activated, created_at, price }, index) => (
             <tr key={name} className="even:bg-blue-gray-50/50">
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-normal">
