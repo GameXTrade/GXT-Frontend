@@ -51,7 +51,7 @@ export default function RecentlyAddedCarousel() {
     useEffect(() => {
         const fetchItems = async () => {
         try {
-            const response = await axios.get('/item/all');
+            const response = await axios.get('/item/recent');
             
             // console.log(response.data)
             setItems(response.data);
@@ -97,19 +97,20 @@ export default function RecentlyAddedCarousel() {
         
         >
         {items && items.length > 0 ? 
-            items.map(item => (
-              
-                <EcommerceCard
-                    key={item.item_id}
-                    productId={item.item_id}
-                    productName={item.name}
-                    // productPrice={getIndividualAntiflagsFromSum(parseInt(item.antiflag))}
-                    productPrice={item.price? item.price + "€": "free"}
-                    productDescription={item.owner_name}
-                    imageUrl={item.imagelink}
-                />
-            ))
-            : <Spinner className="h-12 w-12" />
+          items
+              // .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sortiere nach created_at absteigend
+              .map(item => (
+                  <EcommerceCard
+                      key={item.item_id}
+                      productId={item.item_id}
+                      productName={item.name}
+                      // productPrice={getIndividualAntiflagsFromSum(parseInt(item.antiflag))}
+                      productPrice={item.price ? item.price + "€" : "free"}
+                      productDescription={item.owner_name}
+                      imageUrl={item.imagelink}
+                  />
+              ))
+          : <Spinner className="h-12 w-12" />
         }
         </Carousel>
   </div>
