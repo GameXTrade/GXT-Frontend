@@ -1,8 +1,6 @@
 import { Card, Typography,Tooltip,IconButton,Chip } from "@material-tailwind/react";
 import { PencilIcon } from "@heroicons/react/24/solid";
 
-import axios from "../../../api/axios"
-
 import { useQuery } from '@tanstack/react-query';
 
 import { Spinner } from "@material-tailwind/react";
@@ -15,7 +13,7 @@ export function ActiveTableWithStripedRows() {
   const { data: TABLE_ROWS, isLoading, error, isError } = useQuery({
     queryKey: ['items'], 
     queryFn:  async() => {
-      const response = await fetch('http://localhost:8000/item', {credentials: 'include'})
+      const response = await fetch('https://v2202405172564268947.bestsrv.de/item', {credentials: 'include'})
       return response.json()
     },
     throwOnError: true

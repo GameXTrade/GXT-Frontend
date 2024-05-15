@@ -12,7 +12,7 @@ function ChatBubbleWindow() {
     const {data: items, isLoading, error} = useQuery({
         queryKey: ['items'], 
         queryFn:  () => 
-            fetch('http://localhost:8000/item/all').then((res)=> res.json())
+            fetch('https://v2202405172564268947.bestsrv.de/item/all').then((res)=> res.json())
     });
     // console.log(items)
     if (error) return <div>ERROR</div>;
