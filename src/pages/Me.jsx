@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SidebarWithLogo from '../components/SidebarWithLogo';
-import NoContent from '../components/NoContent';
 import ChatBubbleWindow from '../components/SideBar/ChatBubbleWindow';
+import { useLocation } from 'react-router-dom';
 
 import ItemForm from '../components/SideBar/AssetManagement/ItemForm';
 import { ActiveTableWithStripedRows } from '../components/SideBar/AssetManagement/ActiveTableWithStripedRows';
@@ -17,6 +17,10 @@ function Me() {
     const [open, setOpen] = useState(false);
     const [alertText, setAlertText] = useState("");
 
+    const location = useLocation();
+
+    const component = location.state?.openComponent;
+    
     const handleUploadStatus = (status) => {
         if (status === "OK"){
             setAlertText("Successfully UploadAsset.");
@@ -28,6 +32,13 @@ function Me() {
     const handleOpenComponent = (component) => {
         setOpenComponent(component);
     };
+
+    useEffect(()=>{
+        if (component){
+            handleOpenComponent(component);
+            // setOpenComponent(null);
+        }
+    },[])
     // Funktion zum Übersetzen des geöffneten Strings in die entsprechende Komponente
     const getComponent = (component) => {
         switch (component) {
@@ -66,6 +77,7 @@ function Me() {
                     </Alert>
                 }
                 {getComponent(openComponent)}
+                {/* {!openComponent && <div>Keine Komponente ausgewählt: Hier könnte was hinkommen.</div>} */}
             </div>
         </div>
     );

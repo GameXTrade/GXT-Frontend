@@ -1,5 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import {MaintenanceComponent} from "../components/MaintenanceSection/MaintenanceComponent"
 
 
 export default function ProductPage() {
@@ -7,8 +8,8 @@ export default function ProductPage() {
 
 
     return (
-    <div>
-        <h4>{productId}</h4>
+    <div className="flex justify-center items-center " style={{ height: "calc(100dvh - 253px)" }}>
+        <h4>{<MaintenanceComponent/>}</h4>
     </div>
   )
 }

@@ -50,7 +50,7 @@ export default function RecentlyAddedCarousel() {
         try {
             const response = await axios.get('/item/recent');
             
-            console.log(response.data)
+            // console.log(response.data)
             setItems(response.data);
         } catch (error) {
             console.error('Error fetching items:', error);

@@ -12,9 +12,13 @@ function ProfileMenu() {
   // const closeMenu = () => setIsMenuOpen(false);
  
   const handleProfileButton = (key) => {
-    const { route } = profileMenuItems[key];
+    const { route, label, iscomponent } = profileMenuItems[key];
     if (route){
-      navigate(route);
+      if (iscomponent){
+        navigate(route, { state: { openComponent: label } });
+      }else{
+        navigate(route);
+      }
     }
   }
 
@@ -32,10 +36,13 @@ function ProfileMenu() {
     {
       label: "Inbox",
       icon: InboxArrowDownIcon,
+      route: "/me",
+      iscomponent: true
     },
     {
       label: "Help",
       icon: LifebuoyIcon,
+      route: "/help",
     },
     {
       label: "Sign Out",

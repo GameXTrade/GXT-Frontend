@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, createRoutesFromElements ,RouterProvider, Route } from "react-router-dom";
 
 //pages
+import Help from './pages/Help';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
@@ -38,7 +39,7 @@ const router = createBrowserRouter(
     // Route/RootLayout work like a wrapper
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Home/>}/> 
-      <Route path='verify'element={<VerifyToken />}/> 
+      {/* <Route path='verify'element={<VerifyToken />}/>  */}
       <Route path='sign-up'element={<SignUp/>}/> 
       <Route path='sign-in'element={<SignIn/>}/> 
 
@@ -47,6 +48,8 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoutes/>}>
         {/* <Route path='chat'element={<ChatBubbleWindow/>}/>  */}
         {/* <Route path='status'element={<Status />}/>  */}
+        <Route path='help' element={<Help />}/>
+
         <Route path='me' element={<Me />}/>
       </Route>
     </Route>

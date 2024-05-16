@@ -61,7 +61,7 @@ function SidebarWithLogo({ openComponent  }) {
                 <ListItemPrefix>
                   <PresentationChartBarIcon className="h-5 w-5" />
                 </ListItemPrefix>
-                <Typography color="blue-gray" className="mr-auto font-normal" onClick={() => handleOpenComponent('EditAssets')}>
+                <Typography color="blue-gray" className="mr-auto font-normal">
                   Dashboard
                 </Typography>
               </AccordionHeader>
