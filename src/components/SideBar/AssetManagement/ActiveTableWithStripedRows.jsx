@@ -5,21 +5,31 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Spinner } from "@material-tailwind/react";
 
+
+import axios from '../../../api/axios';
+
 const TABLE_HEAD = ["Name", "Status", "Date", "Price" ,""];
 
  
 export function ActiveTableWithStripedRows() {
 
-  const { data: TABLE_ROWS, isLoading, error, isError } = useQuery({
+  const fetchItems = async () => {
+    try {
+          const response = await axios.get('/item');
+          return response.data;
+    } 
+    catch (error){
+          console.error('Error fetching items:', error);
+    }
+  };
+  const {data: TABLE_ROWS, isLoading, error} = useQuery({
     queryKey: ['items'], 
-    queryFn:  async() => {
-      const response = await fetch('https://v2202405172564268947.bestsrv.de/item', {credentials: 'include'})
-      return response.json()
-    },
-    throwOnError: true
+    queryFn:  () => {
+        // fetch('https://v2202405172564268947.bestsrv.de/item/all').then((res)=> res.json())
+        return fetchItems()
+    }
   });
 
-  // console.log(TABLE_ROWS)
   if (isLoading) return <div className="flex w-full h-full justify-center items-center"><Spinner className="h-12 w-12" /></div>;
   if (TABLE_ROWS && TABLE_ROWS.detail) {
     const errorMessage = TABLE_ROWS.detail;
@@ -36,7 +46,7 @@ export function ActiveTableWithStripedRows() {
     return <div className="flex justify-center items-center text-4xl w-full h-full">No data available</div>;
   }
   return (
-    <Card className="overflow-scroll" style={{ maxHeight: "calc(100dvh - 73px)" }}>
+    <Card className="overflow-scroll" style={{ maxHeight: "calc(100dvh - 85px)" }}>
       <table className="w-full min-w-max table-auto text-left">
         <thead className="sticky top-0 bg-blue-gray-50">
           <tr>
@@ -54,7 +64,7 @@ export function ActiveTableWithStripedRows() {
           </tr>
         </thead>
         <tbody>
-          {!isError && TABLE_ROWS.map(({ name, activated, created_at, price }, index) => (
+          { TABLE_ROWS.map(({ name, activated, created_at, price }, index) => (
             <tr key={name} className="even:bg-blue-gray-50/50">
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-normal">

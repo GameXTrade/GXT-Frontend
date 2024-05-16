@@ -3,16 +3,30 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Input, Button } from "@material-tailwind/react";
 
+import axios from '../../api/axios';
 function ChatBubbleWindow() {
 
     const [email, setEmail] = React.useState("");
     const onChange = ({ target }) => setEmail(target.value);
 
+    const fetchItems = async () => {
+        try 
+        {
+            const response = await axios.get('/item/all');
+            return response.data;
+        } 
+        catch (error) 
+        {
+            console.error('Error fetching items:', error);
+        }
+    };
 
     const {data: items, isLoading, error} = useQuery({
         queryKey: ['items'], 
-        queryFn:  () => 
-            fetch('https://v2202405172564268947.bestsrv.de/item/all').then((res)=> res.json())
+        queryFn:  () => {
+            // fetch('https://v2202405172564268947.bestsrv.de/item/all').then((res)=> res.json())
+            return fetchItems()
+        }
     });
     // console.log(items)
     if (error) return <div>ERROR</div>;

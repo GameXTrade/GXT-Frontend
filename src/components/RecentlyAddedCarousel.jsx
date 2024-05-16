@@ -43,17 +43,14 @@ export default function RecentlyAddedCarousel() {
         antiflags[index]
       }
       );
-  };
-
-
-  
+    };
 
     useEffect(() => {
         const fetchItems = async () => {
         try {
             const response = await axios.get('/item/recent');
             
-            // console.log(response.data)
+            console.log(response.data)
             setItems(response.data);
         } catch (error) {
             console.error('Error fetching items:', error);
@@ -104,7 +101,6 @@ export default function RecentlyAddedCarousel() {
                       key={item.item_id}
                       productId={item.item_id}
                       productName={item.name}
-                      // productPrice={getIndividualAntiflagsFromSum(parseInt(item.antiflag))}
                       productPrice={item.price ? item.price + "€" : "free"}
                       productDescription={item.owner_name}
                       imageUrl={item.imagelink}

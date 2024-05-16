@@ -9,6 +9,7 @@ import { ActiveTableWithStripedRows } from '../components/SideBar/AssetManagemen
 
 import { Alert } from "@material-tailwind/react";
 
+import {MaintenanceComponent} from "../components/MaintenanceSection/MaintenanceComponent"
 
 function Me() {
     const [openComponent, setOpenComponent] = useState(null);
@@ -31,9 +32,9 @@ function Me() {
     const getComponent = (component) => {
         switch (component) {
             case 'Analytics':
-                return <NoContent />;
+                return <MaintenanceComponent />;
             case 'Reporting':
-                return <NoContent />;
+                return <MaintenanceComponent />;
             case 'UploadAsset':
                 return <ItemForm updateUploadStatus={handleUploadStatus} />;
             case 'EditAssets':
@@ -41,7 +42,7 @@ function Me() {
             case 'Inbox':
                 return <ChatBubbleWindow />;
             case 'Settings':
-                return <NoContent />;
+                return <MaintenanceComponent />;
             default:
                 return null;
         }
@@ -50,7 +51,7 @@ function Me() {
         <div className="flex">
             <title>GameXTrade | Me</title>
             <SidebarWithLogo openComponent={handleOpenComponent} />
-            <div className='w-full p-3'>
+            <div className='w-full p-3 '>
                 {/* Hier wird die aktuell geöffnete Komponente gerendert */}
                 {openComponent ==='UploadAsset' &&
                 
