@@ -24,7 +24,6 @@ function ChatBubbleWindow() {
     const {data: items, isLoading, error} = useQuery({
         queryKey: ['items'], 
         queryFn:  () => {
-            // fetch('https://v2202405172564268947.bestsrv.de/item/all').then((res)=> res.json())
             return fetchItems()
         }
     });
