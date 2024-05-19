@@ -10,6 +10,9 @@ function Home() {
 
       {/* Latest Added top 10 */}
       <RecentlyAddedCarousel />
+
+      
+
     </div>
   );
 }

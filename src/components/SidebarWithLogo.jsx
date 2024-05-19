@@ -28,7 +28,7 @@ import {
  
 function SidebarWithLogo({ openComponent  }) {
   const [open, setOpen] = React.useState(0);
-  const [openAlert, setOpenAlert] = React.useState(true);
+  const [openAlert, setOpenAlert] = React.useState(false);
  
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -110,12 +110,12 @@ function SidebarWithLogo({ openComponent  }) {
             </ListItem>
             <AccordionBody className="py-1">
               <List className="p-0">
-                <ListItem onClick={() => handleOpenComponent('UploadAsset')}>
+                {/* <ListItem onClick={() => handleOpenComponent('UploadAsset')}>
                   <ListItemPrefix>
                     <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                   </ListItemPrefix>
                   Upload Asset
-                </ListItem>
+                </ListItem> */}
                 <ListItem onClick={() => handleOpenComponent('EditAssets')}>
                   <ListItemPrefix>
                     <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -132,7 +132,7 @@ function SidebarWithLogo({ openComponent  }) {
             </ListItemPrefix>
             Inbox
             <ListItemSuffix>
-              <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+              <Chip value="6" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
             </ListItemSuffix>
           </ListItem>
           <ListItem onClick={() => handleOpenComponent('Settings')}>
@@ -149,7 +149,7 @@ function SidebarWithLogo({ openComponent  }) {
             Upgrade to PRO
           </Typography>
           <Typography variant="small" className="font-normal opacity-80">
-            Upgrade to Material Tailwind PRO and get even more components, plugins, advanced features
+            Upgrade to Prime and get even more space, advanced features
             and premium.
           </Typography>
           <div className="mt-4 flex gap-3">

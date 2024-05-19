@@ -46,8 +46,8 @@ function Me() {
                 return <MaintenanceComponent />;
             case 'Reporting':
                 return <MaintenanceComponent />;
-            case 'UploadAsset':
-                return <ItemForm updateUploadStatus={handleUploadStatus} />;
+            // case 'UploadAsset':
+            //     return <ItemForm updateUploadStatus={handleUploadStatus} />;
             case 'EditAssets':
                 return <ActiveTableWithStripedRows/>;
             case 'Inbox':

@@ -4,7 +4,7 @@ import axios from "../../../api/axios";
 import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 
-
+import { Alert } from "@material-tailwind/react";
 
 const ItemForm = ({ updateUploadStatus }) => {
     const [selectedAntiflags, setSelectedAntiflags] = useState([]);
@@ -12,6 +12,9 @@ const ItemForm = ({ updateUploadStatus }) => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isDropdownOpenWearable, setIsDropdownOpenWearable] = useState(false);
+
+    const [open, setOpen] = useState(false);
+    const [alertText, setAlertText] = useState("");
 
     const [formData, setFormData] = useState({
         name: '',
@@ -93,24 +96,32 @@ const ItemForm = ({ updateUploadStatus }) => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        // console.log('Form data submitted:', formData);
+        console.log('Form data submitted:', formData);
       
         try{
             const response = await axios.post("/item/create", formData)
-            updateUploadStatus(response.statusText)
             console.log(response.statusText)
+            updateUploadStatus(response.statusText)
             // navigate("/status", {state: {message: response.data.code}})
         } catch (err){
-            console.error('Fehler beim Senden der Daten:', err.response.data.detail);
+            console.error('Fehler beim Senden der Daten:', err.response);
             // navigate("/status", {state: {message: "REFRESH"}})
         }
     };
 
-
+    const handleUploadStatus = (status) => {
+        if (status === "OK"){
+            setAlertText("Successfully UploadAsset.");
+        }else{
+            setAlertText("Something went wrong.");
+        }
+        setOpen(true); // Funktion zum Anzeigen des Alerts
+    };
+    
     return (
         <div className='flex flex-col justify-center items-center bg-white w-full h-full'>
 
-            <form onSubmit={handleSubmit} className='flex flex-col rounded-lg p-8 shadow-xl'>
+            <form onSubmit={handleSubmit} className='flex flex-col rounded-lg p-8 '>
                     
                 <div className="w-72 pb-2">
                     <Input label="Item Name" name="name" value={formData.name} onChange={(e) => handleChange(e.target.name, e.target.value)} required/>
@@ -123,7 +134,7 @@ const ItemForm = ({ updateUploadStatus }) => {
                     <Input label="Imagelink" name="imagelink" value={formData.imagelink} onChange={(e) => handleChange(e.target.name, e.target.value)}/>
                 </div>
                 <div className='pb-2'>
-                    <button className='w-full bg-indigo-200 rounded-md shadow-md hover:bg-indigo-50' type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                    <button className='w-full bg-gray-300 rounded-md shadow-md hover:bg-indigo-50' type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                         Wer soll es <span className='text-red-500'>nicht</span> Tragen?: {formData.antiflag}
                     </button>
                     {isDropdownOpen && (
@@ -158,7 +169,7 @@ const ItemForm = ({ updateUploadStatus }) => {
                     </Select>
                 </div>
                 <div className='pb-2'>
-                    <button className='w-full bg-indigo-200 rounded-md shadow-md hover:bg-indigo-50' type="button" onClick={() => setIsDropdownOpenWearable(!isDropdownOpenWearable)}>
+                    <button className='w-full bg-gray-300 rounded-md shadow-md hover:bg-indigo-50' type="button" onClick={() => setIsDropdownOpenWearable(!isDropdownOpenWearable)}>
                         Was ist das für ein Item?: {formData.wearable}
                     </button>
                     {isDropdownOpenWearable && (
