@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import VerifyToken from './pages/VerifyToken';
 import RootLayout from './components/Root/RootLayout';
+import { Analytics } from '@vercel/analytics/react';
 
 import ProtectedRoutes from './utils/ProtectedRoutes';
 
@@ -64,5 +65,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <RouterProvider router={router} />
         </QueryClientProvider>
       </UserContextProvider>
+      <Analytics />
   </React.StrictMode>
 )
