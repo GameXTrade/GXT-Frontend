@@ -3,32 +3,18 @@ import SidebarWithLogo from '../components/SidebarWithLogo';
 import ChatBubbleWindow from '../components/SideBar/ChatBubbleWindow';
 import { useLocation } from 'react-router-dom';
 
-import ItemForm from '../components/SideBar/AssetManagement/ItemForm';
 import { ActiveTableWithStripedRows } from '../components/SideBar/AssetManagement/ActiveTableWithStripedRows';
-
-
-import { Alert } from "@material-tailwind/react";
 
 import {MaintenanceComponent} from "../components/MaintenanceSection/MaintenanceComponent"
 
 function Me() {
     const [openComponent, setOpenComponent] = useState(null);
 
-    const [open, setOpen] = useState(false);
-    const [alertText, setAlertText] = useState("");
-
     const location = useLocation();
 
     const component = location.state?.openComponent;
     
-    const handleUploadStatus = (status) => {
-        if (status === "OK"){
-            setAlertText("Successfully UploadAsset.");
-        }else{
-            setAlertText("Something went wrong.");
-        }
-        setOpen(true); // Funktion zum Anzeigen des Alerts
-    };
+
     const handleOpenComponent = (component) => {
         setOpenComponent(component);
     };
@@ -64,18 +50,6 @@ function Me() {
             <SidebarWithLogo openComponent={handleOpenComponent} />
             <div className='w-full p-3 '>
                 {/* Hier wird die aktuell geöffnete Komponente gerendert */}
-                {openComponent ==='UploadAsset' &&
-                
-                    <Alert
-                        open={open}
-                        onClose={() => setOpen(false)}
-                        animate={{  mount: { y: 0 },
-                                    unmount: { y: 100 },
-                                }}
-                    >
-                    {alertText}
-                    </Alert>
-                }
                 {getComponent(openComponent)}
                 {/* {!openComponent && <div>Keine Komponente ausgewählt: Hier könnte was hinkommen.</div>} */}
             </div>

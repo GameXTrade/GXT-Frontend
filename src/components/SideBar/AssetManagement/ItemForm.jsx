@@ -4,7 +4,6 @@ import axios from "../../../api/axios";
 import { Input } from "@material-tailwind/react";
 import { Select, Option } from "@material-tailwind/react";
 
-import { Alert } from "@material-tailwind/react";
 
 const ItemForm = ({ updateUploadStatus }) => {
     const [selectedAntiflags, setSelectedAntiflags] = useState([]);
@@ -13,8 +12,6 @@ const ItemForm = ({ updateUploadStatus }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isDropdownOpenWearable, setIsDropdownOpenWearable] = useState(false);
 
-    const [open, setOpen] = useState(false);
-    const [alertText, setAlertText] = useState("");
 
     const [formData, setFormData] = useState({
         name: '',
@@ -55,7 +52,7 @@ const ItemForm = ({ updateUploadStatus }) => {
             ...prevState,
             [name]: value
         }));
-        console.log(name, value)
+        // console.log(name, value)
     };
     
 
@@ -109,14 +106,6 @@ const ItemForm = ({ updateUploadStatus }) => {
         }
     };
 
-    const handleUploadStatus = (status) => {
-        if (status === "OK"){
-            setAlertText("Successfully UploadAsset.");
-        }else{
-            setAlertText("Something went wrong.");
-        }
-        setOpen(true); // Funktion zum Anzeigen des Alerts
-    };
     
     return (
         <div className='flex flex-col justify-center items-center bg-white w-full h-full'>

@@ -44,9 +44,9 @@ export function ActiveTableWithStripedRows() {
     return <div className="flex justify-center items-center text-4xl w-full h-full">{response}</div>;
   }
 
-  if (!TABLE_ROWS || TABLE_ROWS.length === 0) {
-    return <div className="flex justify-center items-center text-4xl w-full h-full">No data available</div>;
-  }
+  // if (!TABLE_ROWS || TABLE_ROWS.length === 0) {
+  //   return <div className="flex justify-center items-center text-4xl w-full h-full">No data available</div>;
+  // }
 
   const totalPages = Math.ceil(TABLE_ROWS.length / itemsPerPage);
 
