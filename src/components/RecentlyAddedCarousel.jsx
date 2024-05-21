@@ -26,30 +26,29 @@ export default function RecentlyAddedCarousel() {
     const [items, setItems] = useState([]);
 
 
-    const getIndividualAntiflagsFromSum = (antiflagSum) => {
-      const selectedIndices = [];
-      let remainingSum = antiflagSum;
+    // const getIndividualAntiflagsFromSum = (antiflagSum) => {
+    //   const selectedIndices = [];
+    //   let remainingSum = antiflagSum;
   
-      antiflags.forEach((flag, index) => {
-          const flagValue = Math.pow(2, index);
-          if ((antiflagSum & flagValue) !== 0) {
-              selectedIndices.push(index);
-              remainingSum -= flagValue;
-          }
-      });
-      return selectedIndices.map((index) => {
+    //   antiflags.forEach((flag, index) => {
+    //       const flagValue = Math.pow(2, index);
+    //       if ((antiflagSum & flagValue) !== 0) {
+    //           selectedIndices.push(index);
+    //           remainingSum -= flagValue;
+    //       }
+    //   });
+    //   return selectedIndices.map((index) => {
         
-        // console.log(antiflags[index])
-        antiflags[index]
-      }
-      );
-    };
+    //     // console.log(antiflags[index])
+    //     antiflags[index]
+    //   }
+    //   );
+    // };
 
     useEffect(() => {
         const fetchItems = async () => {
         try {
             const response = await axios.get('/item/recent');
-            
             // console.log(response.data)
             setItems(response.data);
         } catch (error) {
