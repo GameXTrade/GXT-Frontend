@@ -1,26 +1,43 @@
-import React, { useContext } from 'react';
-import UserContext from '../../context/UserContext';
-import { useNavigate, NavLink } from 'react-router-dom';
-import {Navbar,Typography,Button,Menu,MenuHandler,MenuList,MenuItem,Avatar, Badge, IconButton} from "@material-tailwind/react";
-import {UserCircleIcon,ChevronDownIcon,InboxArrowDownIcon,LifebuoyIcon,PowerIcon} from "@heroicons/react/24/solid";
- 
+import React, { useContext } from "react";
+import UserContext from "../../context/UserContext";
+import { useNavigate, NavLink } from "react-router-dom";
+import {
+  Navbar,
+  Typography,
+  Button,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar,
+  Badge,
+  IconButton,
+} from "@material-tailwind/react";
+import {
+  UserCircleIcon,
+  ChevronDownIcon,
+  InboxArrowDownIcon,
+  LifebuoyIcon,
+  PowerIcon,
+} from "@heroicons/react/24/solid";
+
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  
-  const { user , setUser} = useContext(UserContext);
+
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   // const closeMenu = () => setIsMenuOpen(false);
- 
+
   const handleProfileButton = (key) => {
     const { route, label, iscomponent } = profileMenuItems[key];
-    if (route){
-      if (iscomponent){
+    if (route) {
+      if (iscomponent) {
         navigate(route, { state: { openComponent: label } });
-      }else{
+      } else {
         navigate(route);
       }
     }
-  }
+  };
 
   // profile menu component
   const profileMenuItems = [
@@ -37,7 +54,7 @@ function ProfileMenu() {
       label: "Inbox",
       icon: InboxArrowDownIcon,
       route: "/me",
-      iscomponent: true
+      iscomponent: true,
     },
     {
       label: "Help",
@@ -52,17 +69,17 @@ function ProfileMenu() {
 
   const handleSignOut = () => {
     // Lösche den JWT-HTTPOnly-Cookie
-    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     // console.log("logout")
     // Lösche den LocalStorage-Eintrag
-    localStorage.removeItem('user');
-  
+    localStorage.removeItem("user");
+
     // Optional: Weitere Aufräumarbeiten (z.B. Zurücksetzen des Benutzerkontexts)
     setUser(null);
-  
+
     // Optional: Weiterleitung auf die Sign-Out-Seite oder eine andere gewünschte Seite
-    navigate("/")
-  }
+    navigate("/");
+  };
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -71,16 +88,18 @@ function ProfileMenu() {
           color="blue-gray"
           className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
         >
-          <Badge  overlap="circular" placement="bottom-end" withBorder>
-
-          <Avatar
-            variant="circular"
-            size="sm"
-            alt="tania andrew"
-            className="border border-gray-900 p-0.5"
-            src={user?.image || "https://i0.wp.com/dashboard.render.com/default_gravatar.png?ssl=1"}
+          <Badge overlap="circular" placement="bottom-end" withBorder>
+            <Avatar
+              variant="circular"
+              size="sm"
+              alt="tania andrew"
+              className="border border-gray-900 p-0.5"
+              src={
+                user?.image ||
+                "https://i0.wp.com/dashboard.render.com/default_gravatar.png?ssl=1"
+              }
             />
-            </Badge>
+          </Badge>
           <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3 w-3 transition-transform ${
@@ -93,17 +112,15 @@ function ProfileMenu() {
         {profileMenuItems.map(({ label, icon, route }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
-
             <MenuItem
               key={label}
-              onClick={ () =>{
-                if (label==="Sign Out"){
+              onClick={() => {
+                if (label === "Sign Out") {
                   handleSignOut();
-                }else {
-                  handleProfileButton(key)
+                } else {
+                  handleProfileButton(key);
                 }
-              }
-              }
+              }}
               className={`flex items-center gap-2 rounded ${
                 isLastItem
                   ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
@@ -130,9 +147,7 @@ function ProfileMenu() {
   );
 }
 
- 
 export function ComplexNavbar() {
- 
   const { user } = useContext(UserContext);
 
   return (
@@ -141,18 +156,20 @@ export function ComplexNavbar() {
         <Typography
           as="a"
           href="/"
-          className="mr-4 ml-2 cursor-pointer py-1.5 font-semibold text-xl"
+          variant="h4"
+          className="mr-4 ml-2 cursor-pointer py-1.5 text-black"
         >
           GameXTrade
         </Typography>
 
         {/* if user exist display ProfileMenu else Login & Signup */}
-        {user ? <ProfileMenu />:
-        <div>
-          
+        {user ? (
+          <ProfileMenu />
+        ) : (
+          <div>
             <NavLink to={`/sign-in`}>
               <Button size="sm" variant="text">
-                  Log In
+                Log In
               </Button>
             </NavLink>
             <NavLink to={`/sign-up`}>
@@ -160,12 +177,9 @@ export function ComplexNavbar() {
                 Sign Up
               </Button>
             </NavLink>
-        </div>
-        
-        }
-        
+          </div>
+        )}
       </div>
-    
     </Navbar>
   );
 }

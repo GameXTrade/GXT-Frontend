@@ -1,8 +1,12 @@
-import { Carousel, Typography } from "@material-tailwind/react";
+import { Carousel, Typography, Button } from "@material-tailwind/react";
 
 export function CarouselServerOrGame() {
   return (
-    <Carousel autoplay={true} loop={true} className="rounded-xl my-6 h-[50dvh]">
+    <Carousel
+      // autoplay={true}
+      loop={true}
+      className="rounded-xl my-6 h-[50dvh] select-none"
+    >
       <div className="relative h-full w-full">
         <video
           className="h-full w-full object-cover rounded-lg"
@@ -19,15 +23,31 @@ export function CarouselServerOrGame() {
           />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/[.25]">
-          <div className="w-3/4 text-center md:w-2/4">
-            <Typography
-              variant="h1"
-              color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
-            >
-              The Beauty of Nature
-            </Typography>
+        <div className="absolute inset-0 grid h-full w-full bg-black/[.40]">
+          <div className="flex justify-between">
+            <div className="flex items-center pl-20">
+              <div>
+                <Typography
+                  variant="h1"
+                  color="white"
+                  className="text-3xl md:text-4xl lg:text-5xl"
+                >
+                  The Beauty of Nature
+                </Typography>
+                <Typography variant="h4" color="white">
+                  endures eternally
+                </Typography>
+              </div>
+            </div>
+            <div className="flex items-end pb-20 pr-28">
+              <Button
+                variant="outlined"
+                color="white"
+                className="text-white h-10 bg-white/[.1]"
+              >
+                View
+              </Button>
+            </div>
           </div>
         </div>
       </div>

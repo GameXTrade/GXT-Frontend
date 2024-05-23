@@ -8,7 +8,6 @@ export default function RankingTable() {
   const [itemsToShow, setItemsToShow] = useState([]);
   const [toggleState, setToggleState] = useState(false);
 
-  // Initial loading of items
   useEffect(() => {
     if (
       !allItemsQuery.isLoading &&
@@ -20,7 +19,6 @@ export default function RankingTable() {
     }
   }, [allItemsQuery.isLoading, allItemsQuery.isError, allItemsQuery.data]);
 
-  // Sorting items based on toggleState
   useEffect(() => {
     if (allItemsQuery.data) {
       const items = allItemsQuery.data.slice(0, 10);
@@ -34,7 +32,6 @@ export default function RankingTable() {
   }, [toggleState, allItemsQuery.data]);
 
   const handleToggle = (state) => {
-    // console.log("Current state:", state ? "Trending" : "Top");
     setToggleState(state);
   };
 
@@ -42,7 +39,7 @@ export default function RankingTable() {
     return <>Loading...</>;
   }
   if (allItemsQuery.isError) {
-    return <>There is an error</>;
+    return <>Es gibt einen Fehler</>;
   }
 
   const topFiveItems = itemsToShow.slice(0, 5);
@@ -51,18 +48,18 @@ export default function RankingTable() {
   const TABLE_HEAD = ["#", "Item", "Price"];
 
   return (
-    <div className="px-8">
-      <div className="filter py-5 ">
+    <div className="px-4 lg:px-8 select-none mt-10">
+      <div className="filter py-5">
         <div className="flex h-full justify-between items-center">
           <ToggleButton onToggle={handleToggle} />
           <Tooltip
-            content="Feature not available yet."
+            content="Function not yet available."
             animate={{
               mount: { scale: 1, y: 0 },
               unmount: { scale: 0, y: 25 },
             }}
           >
-            <div className="bg-gray-50 px-2.5 rounded-xl py-2 hover:bg-gray-100 select-none">
+            <div className="bg-gray-100 px-3.5 rounded-xl py-3 hover:bg-gray-200 select-none">
               <Typography variant="small" color="black">
                 View all
               </Typography>
@@ -70,13 +67,18 @@ export default function RankingTable() {
           </Tooltip>
         </div>
       </div>
-      <div className="grid lg:grid-cols-2 gap-8 lg:overflow-x-auto select-none">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 overflow-x-auto md:grid-cols-1">
         <div className="Table#1">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead className="">
+          <table className="w-full min-w-max text-left table-fixed">
+            <thead>
               <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th key={head} className="p-3.5">
+                {TABLE_HEAD.map((head, index) => (
+                  <th
+                    key={head}
+                    className={`p-3.5 ${
+                      index === 0 ? "w-1/12" : index === 1 ? "w-9/12" : "w-2/12"
+                    }`}
+                  >
                     <Typography
                       variant="paragraph"
                       color="blue-gray"
@@ -93,15 +95,19 @@ export default function RankingTable() {
                 <tr
                   key={item.name}
                   className="border-t border-indigo-50 hover:bg-gray-50 cursor-pointer"
-                  // onClick={() => console.log(item)}
                 >
-                  <td className="p-4">{index + 1}</td>
-                  <td className="flex p-4 items-center">
-                    <img
-                      className="w-12 h-12 rounded-lg border"
-                      src={item.imagelink}
-                      alt="image"
-                    />
+                  <td className="p-4 w-1/12">{index + 1}</td>
+                  <td className="p-4 w-9/12 flex items-center">
+                    <Tooltip
+                      className="w-96 h-96 "
+                      content={<img src={item.imagelink}></img>}
+                    >
+                      <img
+                        className="w-[4rem] h-[4rem] rounded-lg border"
+                        src={item.imagelink}
+                        alt="image"
+                      />
+                    </Tooltip>
                     <div className="details pl-3">
                       <Typography
                         variant="paragraph"
@@ -113,7 +119,7 @@ export default function RankingTable() {
                       owner: {item.owner_name}
                     </div>
                   </td>
-                  <td className="p-4">
+                  <td className="p-4 w-2/12 text-left">
                     {item.price === 0 ? "free" : `${item.price}€`}
                   </td>
                 </tr>
@@ -122,11 +128,16 @@ export default function RankingTable() {
           </table>
         </div>
         <div className="Table#2">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead className="top-0">
+          <table className="w-full min-w-max text-left table-fixed">
+            <thead>
               <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th key={head} className="p-3.5">
+                {TABLE_HEAD.map((head, index) => (
+                  <th
+                    key={head}
+                    className={`p-3.5 ${
+                      index === 0 ? "w-1/12" : index === 1 ? "w-9/12" : "w-2/12"
+                    }`}
+                  >
                     <Typography
                       variant="paragraph"
                       color="blue-gray"
@@ -144,13 +155,18 @@ export default function RankingTable() {
                   key={item.name}
                   className="border-t border-indigo-50 hover:bg-gray-50 cursor-pointer"
                 >
-                  <td className="p-4">{index + 6}</td>
-                  <td className="flex p-4 items-center">
-                    <img
-                      className="w-12 h-12 rounded-lg border"
-                      src={item.imagelink}
-                      alt="image"
-                    />
+                  <td className="p-4 w-1/12">{index + 6}</td>
+                  <td className="p-4 w-9/12 flex items-center">
+                    <Tooltip
+                      className="w-96 h-96"
+                      content={<img src={item.imagelink}></img>}
+                    >
+                      <img
+                        className="w-[4rem] h-[4rem] rounded-lg border"
+                        src={item.imagelink}
+                        alt="image"
+                      />
+                    </Tooltip>
                     <div className="details pl-3">
                       <Typography
                         variant="paragraph"
@@ -162,7 +178,7 @@ export default function RankingTable() {
                       owner: {item.owner_name}
                     </div>
                   </td>
-                  <td className="p-4">
+                  <td className="p-4 w-2/12 text-left">
                     {item.price === 0 ? "free" : `${item.price}€`}
                   </td>
                 </tr>
