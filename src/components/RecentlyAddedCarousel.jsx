@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "../api/axios";
+
+import { useRecentItems } from "../services/queries";
+
 import { EcommerceCard } from "../components/EcommerceCard";
 import { Spinner, Typography } from "@material-tailwind/react";
-
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Navigation, Pagination, EffectCoverflow, A11y } from "swiper/modules";
+import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -49,7 +48,7 @@ const antiflags = [
 
 export default function RecentlyAddedCarousel() {
   const [items, setItems] = useState([]);
-
+  const recentlytemsQuery = useRecentItems();
   // const getIndividualAntiflagsFromSum = (antiflagSum) => {
   //   const selectedIndices = [];
   //   let remainingSum = antiflagSum;
@@ -70,22 +69,15 @@ export default function RecentlyAddedCarousel() {
   // };
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await axios.get("/item/recent");
-        // console.log(response.data)
-        setItems(response.data);
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
-
-    fetchItems();
-
-    return () => {
-      // Cleanup logic if needed
-    };
-  }, []);
+    if (
+      !recentlytemsQuery.isLoading &&
+      !recentlytemsQuery.isError &&
+      recentlytemsQuery.data
+    ) {
+      const items = recentlytemsQuery.data;
+      setItems(items);
+    }
+  }, [recentlytemsQuery.data]);
 
   return (
     <div className="mt-[6rem]">
@@ -140,15 +132,9 @@ export default function RecentlyAddedCarousel() {
           }}
         >
           {items && items.length > 0 ? (
-            items.map((item) => (
+            items.map((item, index) => (
               <SwiperSlide key={item.item_id} className="py-2 ">
-                <EcommerceCard
-                  productId={item.item_id}
-                  productName={item.name}
-                  productPrice={item.price ? item.price + "€" : "free"}
-                  productDescription={item.owner_name}
-                  imageUrl={item.imagelink}
-                />
+                <EcommerceCard item={item} />
               </SwiperSlide>
             ))
           ) : (

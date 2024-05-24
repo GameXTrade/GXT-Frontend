@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import "./index.css";
 import {
   createBrowserRouter,
@@ -51,7 +50,7 @@ const router = createBrowserRouter(
       <Route path="sign-up" element={<SignUp />} />
       <Route path="sign-in" element={<SignIn />} />
 
-      <Route path="products/:productId" element={<ProductPage />} />
+      <Route path="product" element={<ProductPage />} />
 
       <Route element={<ProtectedRoutes />}>
         {/* <Route path='chat'element={<ChatBubbleWindow/>}/>  */}
@@ -69,7 +68,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <UserContextProvider>
         <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </UserContextProvider>
     </QueryClientProvider>
     <Analytics />
