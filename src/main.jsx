@@ -68,7 +68,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <UserContextProvider>
         <RouterProvider router={router} />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </UserContextProvider>
     </QueryClientProvider>
     <Analytics />

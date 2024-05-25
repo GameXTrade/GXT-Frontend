@@ -7,6 +7,10 @@ const axiosinstance = axios.create({
   withCredentials: true,
 });
 
+export const uploadFile = async (FormData) => {
+  await axiosinstance.post("/upload", FormData);
+};
+
 export const getAllItems = async () => {
   return (await axiosinstance.get("/item/all")).data.map((items) => items);
 };
