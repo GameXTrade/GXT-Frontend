@@ -1,5 +1,6 @@
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getAllItems, getRecentitems } from "./api";
+import { getAllItems, getRecentitems, getItemById } from "./api";
+import { useEffect } from "react";
 
 export function useItems() {
   return useQuery({
@@ -15,12 +16,15 @@ export function useRecentItems() {
   });
 }
 
-export function useItem(ids) {
-  const queries = (ids ?? []).map((id) => ({
-    queryKey: ["item", id],
-    queryFn: () => getItemById(id),
-    enabled: !!id, // Aktivieren der Abfrage nur, wenn die ID vorhanden ist
-  }));
+export function useItem(itemid) {
+  const query = useQuery({
+    queryKey: ["item", itemid],
+    queryFn: () => getItemById(itemid),
+  });
 
-  return useQueries({ queries });
+  useEffect(() => {
+    query.refetch(); // Trigger initial data fetch
+  }, []); // Run once on component mount
+
+  return query;
 }

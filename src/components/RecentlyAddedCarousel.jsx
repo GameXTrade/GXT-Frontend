@@ -134,7 +134,7 @@ export default function RecentlyAddedCarousel() {
           {items && items.length > 0 ? (
             items.map((item, index) => (
               <SwiperSlide key={item.item_id} className="py-2 ">
-                <EcommerceCard item={item} />
+                <EcommerceCard Item={item} />
               </SwiperSlide>
             ))
           ) : (

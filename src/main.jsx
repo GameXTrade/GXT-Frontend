@@ -50,7 +50,7 @@ const router = createBrowserRouter(
       <Route path="sign-up" element={<SignUp />} />
       <Route path="sign-in" element={<SignIn />} />
 
-      <Route path="product" element={<ProductPage />} />
+      <Route path="product/:item_id" element={<ProductPage />} />
 
       <Route element={<ProtectedRoutes />}>
         {/* <Route path='chat'element={<ChatBubbleWindow/>}/>  */}
@@ -70,7 +70,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RouterProvider router={router} />
         <ReactQueryDevtools initialIsOpen={false} />
       </UserContextProvider>
+      <Analytics />
     </QueryClientProvider>
-    <Analytics />
   </React.StrictMode>
 );

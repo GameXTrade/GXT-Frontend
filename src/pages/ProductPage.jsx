@@ -1,22 +1,32 @@
-import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import React from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import {
   ArrowDownTrayIcon,
   EyeIcon,
   LinkIcon,
 } from "@heroicons/react/24/solid";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { FeaturedImageGallery } from "../components/Productpage/FeaturedImageGallery";
 
+import { useItem } from "../services/queries";
+// import { axiosinstance } from "../services/api";
+
 export default function ProductPage() {
-  const [productInfo, setProductInfo] = useState(null);
-  useEffect(() => {
-    const cookieValue = Cookies.get("SelectedItem");
-    if (cookieValue) {
-      setProductInfo(JSON.parse(cookieValue));
+  const { item_id } = useParams();
+  const Item = useItem(item_id);
+  const navigate = useNavigate();
+  const productInfo = Item.data;
+
+  const handleProductAction = () => {
+    if (productInfo.price !== 0) {
+      navigate("/me", { state: { openComponent: "Inbox" } });
+    } else {
+      window.open(productInfo.link, "_blank", "noopener,noreferrer");
     }
-  }, []);
+  };
+
+  if (Item.isPending) return <div>Loading...</div>;
   if (!productInfo) {
     return <div>Something went wrong</div>;
   }
@@ -31,14 +41,14 @@ export default function ProductPage() {
             alt=""
           />
         </div>
-        <Button className="mt-2">Download</Button>
+        {/* <a href={productInfo.price === 0 ? productInfo.link : "/me"}> */}
+        <Button className="mt-2" onClick={handleProductAction}>
+          {productInfo.price === 0 ? "Download" : `buy`}
+        </Button>
+        {/* </a> */}
       </div>
       <div className="Infoboard flex flex-col rounded-xl ml-5 w-full pl-5">
-        <Typography
-          className="inline-block cursor-pointer "
-          variant="h5"
-          color="blue"
-        >
+        <Typography className="inline-block" variant="h5" color="blue">
           {productInfo.owner_name}
         </Typography>
         <Typography className="pt-3" variant="h2" color="black">
@@ -67,8 +77,8 @@ export default function ProductPage() {
           </div>
         </div>
         <div>
-          <div className="pt-3">
-            <FeaturedImageGallery />
+          <div className="pt-3 mt-3 border rounded-xl">
+            {/* <FeaturedImageGallery /> */}
           </div>
         </div>
       </div>

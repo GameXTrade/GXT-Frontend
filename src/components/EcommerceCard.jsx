@@ -6,19 +6,16 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import Cookies from "js-cookie";
+
 import { useNavigate } from "react-router-dom";
 
-export function EcommerceCard({
-  item, // Das ausgewählte Element
-}) {
-  const { name, price, owner_name, imagelink } = item;
-
+export function EcommerceCard({ Item }) {
+  const { name, price, owner_name, imagelink, item_id } = Item;
   const navigate = useNavigate();
-  const handleClick = () => {
-    // Erstelle ein Date-Objekt, das 10 Minuten in der Zukunft liegt
-    Cookies.set("SelectedItem", JSON.stringify(item));
-    navigate("product");
+
+  const handleClick = (id) => {
+    navigate(`/product/${id}`);
+    return;
   };
 
   return (
@@ -51,7 +48,7 @@ export function EcommerceCard({
         <Button
           ripple={false}
           fullWidth={true}
-          onClick={handleClick}
+          onClick={() => handleClick(item_id)}
           className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
         >
           DETAILS
