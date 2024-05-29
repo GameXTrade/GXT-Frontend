@@ -1,8 +1,9 @@
 {
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    { "src": "/sign-in", "dest": "/" },
+    { "src": "/sign-up", "dest": "/" },
+    { "src": "/me", "dest": "/" },
+    { "src": "/help", "dest": "/" },
+    { "src": "/product/(.*)", "dest": "/" }
   ]
 }
