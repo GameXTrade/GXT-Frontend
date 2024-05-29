@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import {
   ArrowDownTrayIcon,
@@ -7,18 +7,22 @@ import {
 } from "@heroicons/react/24/solid";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { FeaturedImageGallery } from "../components/Productpage/FeaturedImageGallery";
+// import { FeaturedImageGallery } from "../components/Productpage/FeaturedImageGallery";
 
 import { useItem } from "../services/queries";
-// import { axiosinstance } from "../services/api";
 
 export default function ProductPage() {
   const { item_id } = useParams();
-  const Item = useItem(item_id);
+  const [productInfo, setProductInfo] = useState(null);
   const navigate = useNavigate();
-  const productInfo = Item.data;
+  const Item = useItem(item_id);
 
-  console.log(productInfo);
+  useEffect(() => {
+    if (Item.data) {
+      setProductInfo(Item.data);
+    }
+  }, [Item.data]);
+
   const handleProductAction = () => {
     if (productInfo[0].price !== 0) {
       navigate("/me", { state: { openComponent: "Inbox" } });
