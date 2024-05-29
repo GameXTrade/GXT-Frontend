@@ -64,7 +64,7 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
+  //<React.StrictMode>
   <QueryClientProvider client={queryClient}>
     <UserContextProvider>
       <RouterProvider router={router} />
@@ -72,5 +72,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </UserContextProvider>
     <Analytics />
   </QueryClientProvider>
-  // </React.StrictMode>
+  //</React.StrictMode>
 );
