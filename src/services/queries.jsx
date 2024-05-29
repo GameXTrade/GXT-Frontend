@@ -20,6 +20,7 @@ export function useItem(itemid) {
   const query = useQuery({
     queryKey: ["item", itemid],
     queryFn: () => getItemById(itemid),
+    enabled: false,
   });
 
   useEffect(() => {
