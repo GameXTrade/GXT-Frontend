@@ -1,6 +1,6 @@
 import axios from "axios";
-const BASE_URL = "https://v2202405172564268947.bestsrv.de";
-// const BASE_URL = "http://localhost:8000";
+// const BASE_URL = "https://v2202405172564268947.bestsrv.de";
+const BASE_URL = "http://localhost:8000";
 
 export const axiosinstance = axios.create({
   baseURL: BASE_URL,

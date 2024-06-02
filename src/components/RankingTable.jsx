@@ -14,22 +14,23 @@ export default function RankingTable() {
       !allItemsQuery.isError &&
       allItemsQuery.data
     ) {
-      const items = allItemsQuery.data.slice(0, 10);
-      setItemsToShow(items);
-    }
-  }, [allItemsQuery.isLoading, allItemsQuery.isError, allItemsQuery.data]);
-
-  useEffect(() => {
-    if (allItemsQuery.data) {
-      const items = allItemsQuery.data.slice(0, 10);
+      let sortedItems;
       if (toggleState) {
-        const sortedItems = [...items].sort((a, b) => b.price - a.price);
-        setItemsToShow(sortedItems);
+        sortedItems = [...allItemsQuery.data].sort((a, b) => b.price - a.price);
       } else {
-        setItemsToShow(items);
+        // trend = views + download_count
+        sortedItems = [...allItemsQuery.data].sort(
+          (a, b) => b.views + b.download_count - (a.views + a.download_count)
+        );
       }
+      setItemsToShow(sortedItems.slice(0, 10));
     }
-  }, [toggleState, allItemsQuery.data]);
+  }, [
+    toggleState,
+    allItemsQuery.isLoading,
+    allItemsQuery.isError,
+    allItemsQuery.data,
+  ]);
 
   const handleToggle = (state) => {
     setToggleState(state);

@@ -11,8 +11,9 @@ function Home() {
       {/* <UploadFileForm /> */}
       <CarouselServerOrGame />
 
-      {/* Latest Added top 10 */}
+      {/* Latest Added top 10 îtems*/}
       <RankingTable />
+      {/*  */}
       <RecentlyAddedCarousel />
       {/* <img
         src="https://drive.google.com/thumbnail?id=1MUSEFuESibzl6xd66zqxqRV2HitmWLVs"
