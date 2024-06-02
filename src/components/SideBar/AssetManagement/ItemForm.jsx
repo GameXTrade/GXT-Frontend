@@ -1,8 +1,7 @@
 import React, { useState  } from 'react';
 import axios from "../../../api/axios";
 
-import { Input } from "@material-tailwind/react";
-import { Select, Option } from "@material-tailwind/react";
+import { Select, Option, Input } from "@material-tailwind/react";
 
 
 const ItemForm = ({ updateUploadStatus }) => {

@@ -1,6 +1,4 @@
-// ItemFormModal.js
-
-import {React, useState} from "react";
+import { React, useState } from "react";
 import {
   Button,
   Dialog,
@@ -11,23 +9,20 @@ import {
   Input,
 } from "@material-tailwind/react";
 
-import ItemForm from '../../SideBar/AssetManagement/ItemForm';
+import ItemForm from "../../SideBar/AssetManagement/ItemForm";
 import { Alert } from "@material-tailwind/react";
 
-
-
 export default function ItemFormModal({ open, handleClose }) {
-
   const [openAlert, setOpen] = useState(false);
   const [alertText, setAlertText] = useState("");
 
   const handleUploadStatus = (status) => {
-    if (status === "OK"){
+    if (status === "OK") {
       setAlertText("Successfully UploadAsset.");
-    }else{
+    } else {
       setAlertText("Something went wrong.");
     }
-      setOpen(true); // Funktion zum Anzeigen des Alerts
+    setOpen(true); // Funktion zum Anzeigen des Alerts
   };
 
   return (
@@ -58,13 +53,11 @@ export default function ItemFormModal({ open, handleClose }) {
         </DialogHeader>
         <DialogBody className="">
           <Alert
-              open={openAlert}
-              onClose={() => setOpen(false)}
-              animate={{  mount: { y: 0 },
-                          unmount: { y: 100 },
-                      }}
+            open={openAlert}
+            onClose={() => setOpen(false)}
+            animate={{ mount: { y: 0 }, unmount: { y: 100 } }}
           >
-              {alertText}
+            {alertText}
           </Alert>
           <ItemForm updateUploadStatus={handleUploadStatus} />
         </DialogBody>
