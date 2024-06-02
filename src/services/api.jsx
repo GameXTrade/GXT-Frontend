@@ -1,6 +1,6 @@
 import axios from "axios";
-// const BASE_URL = "https://v2202405172564268947.bestsrv.de";
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://v2202405172564268947.bestsrv.de";
+// const BASE_URL = "http://localhost:8000";
 
 export const axiosinstance = axios.create({
   baseURL: BASE_URL,
@@ -9,6 +9,10 @@ export const axiosinstance = axios.create({
 
 export const uploadFile = async (FormData) => {
   await axiosinstance.post("/upload", FormData);
+};
+
+export const updateDownloadCount = async (item_id) => {
+  return await axiosinstance.post(`/item/download_count/${item_id}`);
 };
 
 export const getAllItems = async () => {

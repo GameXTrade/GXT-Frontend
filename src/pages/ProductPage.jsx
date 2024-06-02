@@ -11,6 +11,8 @@ import ReportModal from "../components/Productpage/modal/ReportModal";
 
 // import { FeaturedImageGallery } from "../components/Productpage/FeaturedImageGallery";
 
+import { updateDownloadCount } from "../services/api";
+
 import { useItem } from "../services/queries";
 
 export default function ProductPage() {
@@ -30,11 +32,18 @@ export default function ProductPage() {
     }
   }, [Item.data]);
 
-  const handleProductAction = () => {
-    if (productInfo[0].price !== 0) {
-      navigate("/me", { state: { openComponent: "Inbox" } });
-    } else {
-      window.open(productInfo[0].link, "_blank", "noopener,noreferrer");
+  const handleProductAction = async () => {
+    try {
+      const response = await updateDownloadCount(item_id);
+      console.log(response);
+    } catch (e) {
+      console.error("Fehler beim Aktualisieren der Download-Anzahl:", e);
+    } finally {
+      if (productInfo[0].price !== 0) {
+        navigate("/me", { state: { openComponent: "Inbox" } });
+      } else {
+        window.open(productInfo[0].link, "_blank", "noopener,noreferrer");
+      }
     }
   };
 
