@@ -25,22 +25,25 @@ import {
   ChevronDownIcon,
   CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
- 
-function SidebarWithLogo({ openComponent  }) {
+
+function SidebarWithLogo({ openComponent }) {
   const [open, setOpen] = React.useState(0);
   const [openAlert, setOpenAlert] = React.useState(false);
- 
+
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
- 
+
   const handleOpenComponent = (component) => {
     openComponent(component);
-};
+  };
 
   return (
     <div className="flex">
-      <Card style={{ height: "calc(100dvh - 65px)" }} className="w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 mt-1">
+      <Card
+        style={{ height: "calc(100dvh - 65px)" }}
+        className="w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 mt-1"
+      >
         <div className="mb-2 p-4">
           <Typography variant="h5" color="blue-gray">
             Sidebar
@@ -52,12 +55,18 @@ function SidebarWithLogo({ openComponent  }) {
             icon={
               <ChevronDownIcon
                 strokeWidth={2.5}
-                className={`mx-auto h-4 w-4 transition-transform ${open === 1 ? "rotate-180" : ""}`}
+                className={`mx-auto h-4 w-4 transition-transform ${
+                  open === 1 ? "rotate-180" : ""
+                }`}
               />
             }
+            disabled
           >
             <ListItem className="p-0" selected={open === 1}>
-              <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
+              <AccordionHeader
+                onClick={() => handleOpen(1)}
+                className="border-b-0 p-3"
+              >
                 <ListItemPrefix>
                   <PresentationChartBarIcon className="h-5 w-5" />
                 </ListItemPrefix>
@@ -68,13 +77,13 @@ function SidebarWithLogo({ openComponent  }) {
             </ListItem>
             <AccordionBody className="py-1">
               <List className="p-0">
-                <ListItem onClick={() => handleOpenComponent('Analytics')}>
+                <ListItem onClick={() => handleOpenComponent("Analytics")}>
                   <ListItemPrefix>
                     <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                   </ListItemPrefix>
                   Analytics
                 </ListItem>
-                <ListItem onClick={() => handleOpenComponent('Reporting')}>
+                <ListItem onClick={() => handleOpenComponent("Reporting")}>
                   <ListItemPrefix>
                     <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                   </ListItemPrefix>
@@ -94,12 +103,17 @@ function SidebarWithLogo({ openComponent  }) {
             icon={
               <ChevronDownIcon
                 strokeWidth={2.5}
-                className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""}`}
+                className={`mx-auto h-4 w-4 transition-transform ${
+                  open === 2 ? "rotate-180" : ""
+                }`}
               />
             }
           >
             <ListItem className="p-0" selected={open === 2}>
-              <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
+              <AccordionHeader
+                onClick={() => handleOpen(2)}
+                className="border-b-0 p-3"
+              >
                 <ListItemPrefix>
                   <ShoppingBagIcon className="h-5 w-5" />
                 </ListItemPrefix>
@@ -116,7 +130,7 @@ function SidebarWithLogo({ openComponent  }) {
                   </ListItemPrefix>
                   Upload Asset
                 </ListItem> */}
-                <ListItem onClick={() => handleOpenComponent('EditAssets')}>
+                <ListItem onClick={() => handleOpenComponent("EditAssets")}>
                   <ListItemPrefix>
                     <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                   </ListItemPrefix>
@@ -126,31 +140,40 @@ function SidebarWithLogo({ openComponent  }) {
             </AccordionBody>
           </Accordion>
           <hr className="my-2 border-blue-gray-50" />
-          <ListItem onClick={() => handleOpenComponent('Inbox')}>
+          <ListItem onClick={() => handleOpenComponent("Inbox")}>
             <ListItemPrefix>
               <InboxIcon className="h-5 w-5" />
             </ListItemPrefix>
             Inbox
             <ListItemSuffix>
-              <Chip value="6" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+              <Chip
+                value="6"
+                size="sm"
+                variant="ghost"
+                color="blue-gray"
+                className="rounded-full"
+              />
             </ListItemSuffix>
           </ListItem>
-          <ListItem onClick={() => handleOpenComponent('Settings')}>
+          <ListItem onClick={() => handleOpenComponent("Settings")} disabled>
             <ListItemPrefix>
               <Cog6ToothIcon className="h-5 w-5" />
             </ListItemPrefix>
             Settings
           </ListItem>
-          
         </List>
-        <Alert open={openAlert} className="mt-auto" onClose={() => setOpenAlert(false)}>
+        <Alert
+          open={openAlert}
+          className="mt-auto"
+          onClose={() => setOpenAlert(false)}
+        >
           <CubeTransparentIcon className="mb-4 h-12 w-12" />
           <Typography variant="h6" className="mb-1">
             Upgrade to PRO
           </Typography>
           <Typography variant="small" className="font-normal opacity-80">
-            Upgrade to Prime and get even more space, advanced features
-            and premium.
+            Upgrade to Prime and get even more space, advanced features and
+            premium.
           </Typography>
           <div className="mt-4 flex gap-3">
             <Typography
@@ -168,9 +191,8 @@ function SidebarWithLogo({ openComponent  }) {
           </div>
         </Alert>
       </Card>
-  
     </div>
   );
 }
 
-export default SidebarWithLogo
+export default SidebarWithLogo;

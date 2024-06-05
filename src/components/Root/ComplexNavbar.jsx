@@ -56,11 +56,11 @@ function ProfileMenu() {
       route: "/me",
       iscomponent: true,
     },
-    {
-      label: "Help",
-      icon: LifebuoyIcon,
-      route: "/help",
-    },
+    // {
+    //   label: "Help",
+    //   icon: LifebuoyIcon,
+    //   route: "/help",
+    // },
     {
       label: "Sign Out",
       icon: PowerIcon,
