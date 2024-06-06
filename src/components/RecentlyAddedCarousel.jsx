@@ -82,29 +82,25 @@ export default function RecentlyAddedCarousel() {
   return (
     <div className="mt-[6rem]">
       <div className="text-2xl py-4">
-        <Typography
-          variant="h4"
-          color="black"
-          className="title flex items-center justify-center"
-        >
+        <Typography variant="h4" color="black" className="title pl-1">
           Recently Added
         </Typography>
       </div>
       <div className="">
         <Swiper
-          effect={"coverflow"}
+          // effect={"coverflow"}
           grabCursor={true}
           slidesPerView={3}
-          centeredSlides={true}
-          spaceBetween={"0px"}
-          loop={true}
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 3.5,
-            slideShadows: false,
-          }}
+          // centeredSlides={true}
+          spaceBetween={"16px"}
+          // loop={true}
+          // coverflowEffect={{
+          //   rotate: 0,
+          //   stretch: 0,
+          //   depth: 100,
+          //   modifier: 3.5,
+          //   slideShadows: false,
+          // }}
           pagination={{ el: ".swiper-pagination", clickable: true }}
           navigation={{
             nextEl: ".swiper-button-next",
