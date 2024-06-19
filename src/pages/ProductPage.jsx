@@ -62,7 +62,7 @@ export default function ProductPage() {
         <div className="body">
           <img
             className="w-full h-full object-cover rounded-xl"
-            src={productInfo[0].imagelink}
+            src={productInfo[0].image_link}
             alt=""
           />
         </div>

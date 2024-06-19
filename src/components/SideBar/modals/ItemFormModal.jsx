@@ -27,13 +27,17 @@ export default function ItemFormModal({ open, handleClose }) {
 
   return (
     <section className="grid place-items-center h-screen">
-      <Dialog className="p-4" size="sm" open={open} handler={handleClose}>
-        <DialogHeader className="justify-end">
+      <Dialog className="pb-6" size="sm" open={open} handler={handleClose}>
+        <DialogHeader className="flex items-center justify-between">
+          <Typography className="title pl-7 flex-1 text-center" variant="h3">
+            Create Item
+          </Typography>
           <IconButton
             color="gray"
             size="sm"
             variant="text"
             onClick={handleClose}
+            className="close-btn"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

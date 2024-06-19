@@ -142,7 +142,7 @@ export function ActiveTableWithStripedRows() {
           <tbody>
             {paginatedRows.map(
               (
-                { item_id, imagelink, name, activated, download_count, price },
+                { item_id, image_link, name, activated, download_count, price },
                 index
               ) => (
                 <tr
@@ -150,7 +150,11 @@ export function ActiveTableWithStripedRows() {
                   className="border-b border-indigo-50 hover:bg-blue-gray-50/50"
                 >
                   <dt className="p-4">
-                    <img className="w-10 h-10 rounded" src={imagelink} alt="" />
+                    <img
+                      className="w-10 h-10 rounded"
+                      src={image_link}
+                      alt=""
+                    />
                   </dt>
                   <td className="p-4">
                     <Typography

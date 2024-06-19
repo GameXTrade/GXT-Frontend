@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export function EcommerceCard({ Item }) {
-  const { name, price, owner_name, imagelink, item_id } = Item;
+  const { name, price, owner_name, image_link, item_id } = Item;
   const navigate = useNavigate();
 
   const handleClick = (id) => {
@@ -22,7 +22,7 @@ export function EcommerceCard({ Item }) {
     <Card className="h-[25rem] justify-between border">
       <CardHeader shadow={true} floated={false} className="">
         <img
-          src={imagelink}
+          src={image_link}
           alt="card-image"
           className="h-full w-full object-cover"
         />

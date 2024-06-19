@@ -88,19 +88,9 @@ export default function RecentlyAddedCarousel() {
       </div>
       <div className="">
         <Swiper
-          // effect={"coverflow"}
           grabCursor={true}
           slidesPerView={3}
-          // centeredSlides={true}
           spaceBetween={"16px"}
-          // loop={true}
-          // coverflowEffect={{
-          //   rotate: 0,
-          //   stretch: 0,
-          //   depth: 100,
-          //   modifier: 3.5,
-          //   slideShadows: false,
-          // }}
           pagination={{ el: ".swiper-pagination", clickable: true }}
           navigation={{
             nextEl: ".swiper-button-next",

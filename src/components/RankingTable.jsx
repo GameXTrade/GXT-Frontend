@@ -101,11 +101,11 @@ export default function RankingTable() {
                   <td className="p-4 w-9/12 flex items-center">
                     <Tooltip
                       className="w-96 h-96 "
-                      content={<img src={item.imagelink}></img>}
+                      content={<img src={item.image_link}></img>}
                     >
                       <img
                         className="w-[4rem] h-[4rem] rounded-lg border"
-                        src={item.imagelink}
+                        src={item.image_link}
                         alt="image"
                       />
                     </Tooltip>
@@ -160,11 +160,11 @@ export default function RankingTable() {
                   <td className="p-4 w-9/12 flex items-center">
                     <Tooltip
                       className="w-96 h-96"
-                      content={<img src={item.imagelink}></img>}
+                      content={<img src={item.image_link}></img>}
                     >
                       <img
                         className="w-[4rem] h-[4rem] rounded-lg border"
-                        src={item.imagelink}
+                        src={item.image_link}
                         alt="image"
                       />
                     </Tooltip>
