@@ -42,7 +42,11 @@ export default function ProductPage() {
       if (productInfo[0].price !== 0) {
         navigate("/me", { state: { openComponent: "Inbox" } });
       } else {
-        window.open(productInfo[0].link, "_blank", "noopener,noreferrer");
+        window.open(
+          productInfo[0].download_link,
+          "_blank",
+          "noopener,noreferrer"
+        );
       }
     }
   };

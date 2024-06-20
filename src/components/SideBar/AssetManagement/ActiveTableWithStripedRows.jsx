@@ -142,7 +142,7 @@ export function ActiveTableWithStripedRows() {
           <tbody>
             {paginatedRows.map(
               (
-                { item_id, image_link, name, activated, download_count, price },
+                { item_id, image_link, name, status, download_count, price },
                 index
               ) => (
                 <tr
@@ -170,8 +170,8 @@ export function ActiveTableWithStripedRows() {
                       <Chip
                         size="sm"
                         variant="ghost"
-                        value={activated ? "active" : "inactive"}
-                        color={activated ? "green" : "red"}
+                        value={status ? "active" : "inactive"}
+                        color={status ? "green" : "red"}
                       />
                     </div>
                   </td>

@@ -19,7 +19,7 @@ export function EcommerceCard({ Item }) {
   };
 
   return (
-    <Card className="h-[25rem] justify-between border">
+    <Card className="h-[20rem] w-[19rem] justify-between border">
       <CardHeader shadow={true} floated={false} className="">
         <img
           src={image_link}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useItems } from "../services/queries";
+import { useItems } from "../../services/queries";
 import { Typography, Tooltip } from "@material-tailwind/react";
-import ToggleButton from "./ToggleButton";
+import ToggleButton from "../ToggleButton";
 
 export default function RankingTable() {
   const allItemsQuery = useItems();
@@ -16,6 +16,7 @@ export default function RankingTable() {
     ) {
       let sortedItems;
       if (toggleState) {
+        // top = most expensive
         sortedItems = [...allItemsQuery.data].sort((a, b) => b.price - a.price);
       } else {
         // trend = views + download_count

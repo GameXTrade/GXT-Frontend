@@ -1,5 +1,11 @@
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getAllItems, getRecentitems, getItemById } from "./api";
+import {
+  getAllItems,
+  getItemById,
+  getRecentItems,
+  getNotableItems,
+  getMostDownloadedItemsInDay,
+} from "./api";
 import { useEffect } from "react";
 
 export function useItems() {
@@ -8,11 +14,23 @@ export function useItems() {
     queryFn: getAllItems,
   });
 }
+export function useNotableItems() {
+  return useQuery({
+    queryKey: ["notables"],
+    queryFn: getNotableItems,
+  });
+}
 
 export function useRecentItems() {
   return useQuery({
     queryKey: ["recent"],
-    queryFn: getRecentitems,
+    queryFn: getRecentItems,
+  });
+}
+export function useMostDownloadedInDayItems() {
+  return useQuery({
+    queryKey: ["downloaded"],
+    queryFn: getMostDownloadedItemsInDay,
   });
 }
 

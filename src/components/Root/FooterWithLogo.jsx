@@ -24,8 +24,7 @@ export function FooterWithLogo() {
   return (
     <footer className="w-full bg-white p-8">
       <Alert
-        className="fixed left-0 bottom-0.5 flex justify-center"
-        // variant="outlined"
+        className="fixed left-0 bottom-0.5 flex justify-center z-50  text-white"
         icon={<Icon />}
       >
         UNDER CONSTRUCTION
